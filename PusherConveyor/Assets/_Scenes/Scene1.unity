@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 47146563}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: Untagged
+  m_TagString: ConveyorEnd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1136,6 +1136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193572000}
   - component: {fileID: 193572001}
+  - component: {fileID: 193572002}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -1190,6 +1191,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &193572002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193571999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683cc7cdb25ff8846a7f3e66f17c5547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elevatorName: Elevator
+  programOrganizationUnit: MAIN
 --- !u!1 &197053402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,9 +2895,10 @@ GameObject:
   - component: {fileID: 453314167}
   - component: {fileID: 453314166}
   - component: {fileID: 453314170}
+  - component: {fileID: 453314171}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Product
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2962,14 +2977,25 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453314165}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 20
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &453314171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 453314165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea257705cf52ac48b275d5b9bb66653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &468539053
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3300,7 @@ GameObject:
   - component: {fileID: 499274857}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: Untagged
+  m_TagString: ConveyorEnd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4314,9 +4340,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 781840479}
+  - component: {fileID: 781840480}
   m_Layer: 0
   m_Name: ConveyorBelt
-  m_TagString: Untagged
+  m_TagString: ConveyorBelt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4340,6 +4367,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781840480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 781840478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55321d51c49ccd2459b813f7f5869777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twincatAdsPort: 851
 --- !u!1 &856987496
 GameObject:
   m_ObjectHideFlags: 0
@@ -4421,6 +4460,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 905983724}
+  - component: {fileID: 905983725}
+  - component: {fileID: 905983726}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Untagged
@@ -4444,6 +4485,31 @@ Transform:
   m_Father: {fileID: 193572000}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905983725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905983723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea27d9d015aed84dac33bbfc74064a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conveyorName: ElevatorConveyor
+  programOrganizationUnit: MAIN
+--- !u!65 &905983726
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905983723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 811.24225, y: 686.4281, z: 500}
+  m_Center: {x: 391.4017, y: 463.21405, z: -211.61371}
 --- !u!1 &914671526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5246,9 +5312,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1084562448}
+  - component: {fileID: 1084562450}
+  - component: {fileID: 1084562449}
   m_Layer: 0
   m_Name: Conveyor
-  m_TagString: Untagged
+  m_TagString: Conveyor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5269,6 +5337,31 @@ Transform:
   m_Father: {fileID: 648769199}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084562449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1084562447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea27d9d015aed84dac33bbfc74064a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conveyorName: Conveyor1
+  programOrganizationUnit: MAIN
+--- !u!65 &1084562450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1084562447}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1493.4443, y: 691.9536, z: 500}
+  m_Center: {x: 1547.0083, y: 465.9768, z: -211.61371}
 --- !u!1 &1107215910
 GameObject:
   m_ObjectHideFlags: 0
@@ -5643,6 +5736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123326533}
   - component: {fileID: 1123326534}
+  - component: {fileID: 1123326535}
   m_Layer: 0
   m_Name: ShakingPart
   m_TagString: Untagged
@@ -5693,6 +5787,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1123326535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123326532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cf011ce90e56e48904aada96066178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxShakerName: BoxShaker
+  programOrganizationUnit: MAIN
 --- !u!1 &1129599719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6100,7 +6207,7 @@ GameObject:
   - component: {fileID: 1196107378}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: Untagged
+  m_TagString: ConveyorEnd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9816,6 +9923,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2014735928}
+  - component: {fileID: 2014735930}
+  - component: {fileID: 2014735929}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Untagged
@@ -9839,6 +9948,31 @@ Transform:
   m_Father: {fileID: 1041103532}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014735929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2014735927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea27d9d015aed84dac33bbfc74064a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conveyorName: Conveyor2
+  programOrganizationUnit: MAIN
+--- !u!65 &2014735930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2014735927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1564.3796, y: 80, z: 500}
+  m_Center: {x: -786.5807, y: 660, z: -211.61371}
 --- !u!1 &2046331663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9994,6 +10128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084556163}
   - component: {fileID: 2084556164}
+  - component: {fileID: 2084556165}
   m_Layer: 0
   m_Name: Pusher
   m_TagString: Untagged
@@ -10033,6 +10168,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &2084556165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084556162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892421ac2716ddb4586c3a5f64cc0f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pusherName: Pusher
+  programOrganizationUnit: MAIN
 --- !u!1 &2092272288
 GameObject:
   m_ObjectHideFlags: 0

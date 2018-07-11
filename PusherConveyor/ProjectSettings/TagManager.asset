@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Product
+  - ConveyorEnd
+  - ConveyorBelt
+  - Conveyor
+  - TargetPoint
   layers:
   - Default
   - TransparentFX

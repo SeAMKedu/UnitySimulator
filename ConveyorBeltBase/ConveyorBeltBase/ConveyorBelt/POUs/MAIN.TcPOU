@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.11">
+  <POU Name="MAIN" Id="{29788a47-3536-4e1c-9794-e1a35597fb7f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+END_VAR
+
+VAR_INPUT
+	ElevatorSensor AT %IX1.0: BOOL;
+	Conveyor2Sensor AT %IX2.0: BOOL;
+END_VAR
+
+VAR_OUTPUT
+	// Conveyor 1 variables
+	Conveyor1 AT %QX0.0: BOOL;
+	
+	// Elevator variables
+	ElevatorConveyor AT %QX1.0: BOOL;
+	ElevatorTableUp AT %QX1.1: BOOL;
+	ElevatorTableDown AT %QX1.2: BOOL;
+	
+	// Conveyor 2 variables
+	Conveyor2 AT %QX2.0: BOOL;
+	PusherPush AT %QX2.1: BOOL;
+	PusherReset AT %QX2.2: BOOL;
+	
+	// Box variables
+	BoxShaker AT %QX3.0: BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

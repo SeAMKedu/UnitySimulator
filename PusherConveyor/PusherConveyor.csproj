@@ -313,10 +313,12 @@
     <Compile Include="Assets\Scripts\CameraDrag.cs" />
     <Compile Include="Assets\Scripts\FlyingCamera.cs" />
     <Compile Include="Assets\Scripts\Models\TwinCATVariable.cs" />
+    <Compile Include="Assets\Scripts\Product.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Box.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Conveyor.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Elevator.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Pusher.cs" />
+    <Compile Include="Assets\Scripts\TwinCAT\Sensor.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\TwinCAT_ADS.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

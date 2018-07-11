@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.20">
+	<Project ProjectGUID="{7242729C-47F8-49A3-9CF5-FED9D30F7D8E}" Target64Bit="true" ShowHideConfigurations="#x306">
+		<System>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{C2AA4172-E1D2-413B-B895-C97141DCD748}" Name="ConveyorBelt" PrjFilePath="ConveyorBelt\ConveyorBelt.plcproj" TmcFilePath="ConveyorBelt\ConveyorBelt.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="ConveyorBelt\ConveyorBelt.tmc">
+					<Name>ConveyorBelt Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.ElevatorSensor</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Conveyor2Sensor</Name>
+							<Type>BIT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.Conveyor1</Name>
+							<Comment>
+								<![CDATA[ Conveyor 1 variables]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.ElevatorConveyor</Name>
+							<Comment>
+								<![CDATA[ Elevator variables]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.ElevatorTableUp</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.ElevatorTableDown</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Conveyor2</Name>
+							<Comment>
+								<![CDATA[ Conveyor 2 variables]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.PusherPush</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.PusherReset</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.BoxShaker</Name>
+							<Comment>
+								<![CDATA[ Box variables]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+					</Vars>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>
