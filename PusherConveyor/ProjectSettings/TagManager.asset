@@ -9,6 +9,8 @@ TagManager:
   - ConveyorBelt
   - Conveyor
   - TargetPoint
+  - InfraredRay
+  - ShootingPoint
   layers:
   - Default
   - TransparentFX

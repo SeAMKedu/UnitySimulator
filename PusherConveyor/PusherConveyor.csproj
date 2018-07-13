@@ -311,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraDrag.cs" />
+    <Compile Include="Assets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\FlyingCamera.cs" />
     <Compile Include="Assets\Scripts\Models\TwinCATVariable.cs" />
     <Compile Include="Assets\Scripts\Product.cs" />

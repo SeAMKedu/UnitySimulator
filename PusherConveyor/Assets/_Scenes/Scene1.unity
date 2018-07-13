@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 47146563}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: ConveyorEnd
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -504,7 +504,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1977856446}
   m_Father: {fileID: 1973338533}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2445,6 +2446,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 347382723}
   m_Mesh: {fileID: 4300076, guid: a006f79dc8f8b144b87c8363ad24e48e, type: 3}
+--- !u!1 &351534209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 351534210}
+  m_Layer: 0
+  m_Name: TheActualConveyorEnd
+  m_TagString: ConveyorEnd
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351534210
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 351534209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 789.4, y: 209, z: -219.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1084562448}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379673497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,10 +2921,10 @@ GameObject:
   m_Component:
   - component: {fileID: 453314169}
   - component: {fileID: 453314168}
-  - component: {fileID: 453314167}
   - component: {fileID: 453314166}
   - component: {fileID: 453314170}
   - component: {fileID: 453314171}
+  - component: {fileID: 453314167}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Product
@@ -2937,8 +2966,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &453314167
-CapsuleCollider:
+--- !u!65 &453314167
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2946,10 +2975,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 0.93
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1.0000001}
+  m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940696}
 --- !u!33 &453314168
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2964,8 +2992,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453314165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2094, y: 272, z: -167}
-  m_LocalScale: {x: 300, y: 50, z: 300}
+  m_LocalPosition: {x: 21.06, y: 3.11, z: -1.74}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2978,8 +3006,8 @@ Rigidbody:
   m_GameObject: {fileID: 453314165}
   serializedVersion: 2
   m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 1
+  m_Drag: 6
+  m_AngularDrag: 6
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2996,6 +3024,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea257705cf52ac48b275d5b9bb66653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConveyor: {fileID: 0}
+  conveyorEndPoints: []
+  currentTarget: {fileID: 0}
+  IamMoving: 0
 --- !u!1 &468539053
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,9 +3330,11 @@ GameObject:
   - component: {fileID: 499274856}
   - component: {fileID: 499274858}
   - component: {fileID: 499274857}
+  - component: {fileID: 499274860}
+  - component: {fileID: 499274859}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: ConveyorEnd
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3361,6 +3395,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 499274855}
   m_Mesh: {fileID: 4300074, guid: a006f79dc8f8b144b87c8363ad24e48e, type: 3}
+--- !u!65 &499274859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 499274855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 195.34595, y: 159.57568, z: 500}
+  m_Center: {x: 892.001, y: 199.78784, z: -211.61371}
+--- !u!114 &499274860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 499274855}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c916eb0d26d909d4f87f39d8ec9e0f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCanMove: 1
 --- !u!1 &518521125
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,8 +3556,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10000
-  field of view: 71.264885
+  far clip plane: 100
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3523,13 +3581,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543238198}
-  m_LocalRotation: {x: -0.05606105, y: 0.92208654, z: -0.35395586, w: -0.14604402}
-  m_LocalPosition: {x: 939, y: 1592, z: 1641}
+  m_LocalRotation: {x: -0.04000127, y: 0.9188185, z: -0.38058704, w: -0.09657162}
+  m_LocalPosition: {x: 6.074599, y: 16.76117, z: 15.43655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 42, y: 198, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 192, z: 0}
 --- !u!114 &543238203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3541,7 +3599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe58f323ea6f51b42b287b5642264af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragSpeed: 20
+  dragSpeed: 2
 --- !u!114 &543238204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4356,7 +4414,7 @@ Transform:
   m_GameObject: {fileID: 781840478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 2046331664}
   - {fileID: 1389143865}
@@ -4452,6 +4510,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856987496}
   m_Mesh: {fileID: 4300248, guid: a006f79dc8f8b144b87c8363ad24e48e, type: 3}
+--- !u!1 &861925334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 861925335}
+  m_Layer: 0
+  m_Name: TheActualConveyorEnd
+  m_TagString: ConveyorEnd
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861925335
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 861925334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1467, y: 698, z: -235}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2014735928}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905983723
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,6 +4548,7 @@ GameObject:
   - component: {fileID: 905983724}
   - component: {fileID: 905983725}
   - component: {fileID: 905983726}
+  - component: {fileID: 905983727}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Untagged
@@ -4482,6 +4569,7 @@ Transform:
   - {fileID: 47146562}
   - {fileID: 1387751398}
   - {fileID: 922512440}
+  - {fileID: 1529521554}
   m_Father: {fileID: 193572000}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4508,8 +4596,20 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 811.24225, y: 686.4281, z: 500}
-  m_Center: {x: 391.4017, y: 463.21405, z: -211.61371}
+  m_Size: {x: 143.49924, y: 134.90906, z: 375.49423}
+  m_Center: {x: 323.87833, y: 246.59691, z: -273.86658}
+--- !u!114 &905983727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905983723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c916eb0d26d909d4f87f39d8ec9e0f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCanMove: 0
 --- !u!1 &914671526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5304,6 +5404,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1069497175}
   m_Mesh: {fileID: 4300012, guid: a006f79dc8f8b144b87c8363ad24e48e, type: 3}
+--- !u!1 &1074967925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1074967926}
+  m_Layer: 0
+  m_Name: PointToShootRayFrom
+  m_TagString: ShootingPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1074967926
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1074967925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -527, y: 747.4, z: -432.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1800543140}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1084562447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,6 +5442,7 @@ GameObject:
   - component: {fileID: 1084562448}
   - component: {fileID: 1084562450}
   - component: {fileID: 1084562449}
+  - component: {fileID: 1084562451}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Conveyor
@@ -5334,6 +5463,7 @@ Transform:
   - {fileID: 499274856}
   - {fileID: 347382724}
   - {fileID: 1708994954}
+  - {fileID: 351534210}
   m_Father: {fileID: 648769199}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5360,8 +5490,20 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1493.4443, y: 691.9536, z: 500}
-  m_Center: {x: 1547.0083, y: 465.9768, z: -211.61371}
+  m_Size: {x: 117.38159, y: 142.34692, z: 500}
+  m_Center: {x: 858.9772, y: 191.17346, z: -211.61371}
+--- !u!114 &1084562451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1084562447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c916eb0d26d909d4f87f39d8ec9e0f47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCanMove: 1
 --- !u!1 &1107215910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6207,7 +6349,7 @@ GameObject:
   - component: {fileID: 1196107378}
   m_Layer: 0
   m_Name: ConveyorEnd
-  m_TagString: ConveyorEnd
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7917,6 +8059,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1522166304}
   m_Mesh: {fileID: 4300144, guid: a006f79dc8f8b144b87c8363ad24e48e, type: 3}
+--- !u!1 &1529521553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1529521554}
+  m_Layer: 0
+  m_Name: TheActualConveyorEnd
+  m_TagString: ConveyorEnd
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1529521554
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1529521553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.7, y: 207.9, z: -239.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 905983724}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1535134857
 GameObject:
   m_ObjectHideFlags: 0
@@ -8217,6 +8387,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1617799905}
+  - component: {fileID: 1617799906}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -8239,6 +8410,19 @@ Transform:
   m_Father: {fileID: 1041103532}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1617799906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1617799904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d7349c522295c4fbfdedee832f267e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorName: Conveyor2Sensor
+  programOrganizationUnit: MAIN
 --- !u!1 &1625108933
 GameObject:
   m_ObjectHideFlags: 0
@@ -9254,7 +9438,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1074967926}
   m_Father: {fileID: 1617799905}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9820,6 +10005,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1973338533}
+  - component: {fileID: 1973338534}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -9841,6 +10027,47 @@ Transform:
   - {fileID: 72603383}
   m_Father: {fileID: 1696719996}
   m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1973338534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973338532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d7349c522295c4fbfdedee832f267e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorName: ElevatorSensor
+  programOrganizationUnit: MAIN
+--- !u!1 &1977856445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1977856446}
+  m_Layer: 0
+  m_Name: PointToShootRayFrom
+  m_TagString: ShootingPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1977856446
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1977856445}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 374.3, y: 248.8, z: -521.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 72603383}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982264343
 GameObject:
@@ -9945,6 +10172,7 @@ Transform:
   - {fileID: 1196107377}
   - {fileID: 319222463}
   - {fileID: 1436880607}
+  - {fileID: 861925335}
   m_Father: {fileID: 1041103532}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

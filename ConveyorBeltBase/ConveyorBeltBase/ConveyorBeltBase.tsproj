@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.20">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.22">
 	<Project ProjectGUID="{7242729C-47F8-49A3-9CF5-FED9D30F7D8E}" Target64Bit="true" ShowHideConfigurations="#x306">
 		<System>
 			<Tasks>
@@ -17,10 +17,38 @@
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>MAIN.ElevatorSensor</Name>
+							<Comment>
+								<![CDATA[ Sensor attached to elevator]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.ElevatorTableIsLifted</Name>
+							<Comment>
+								<![CDATA[ Elevator is currently lifted]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.ElevatorTableIsDescended</Name>
+							<Comment>
+								<![CDATA[ Elevator is currently descended]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.Conveyor2Sensor</Name>
+							<Comment>
+								<![CDATA[ Conveyor 2 inputs]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.PusherPushed</Name>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.PusherRetracted</Name>
 							<Type>BIT</Type>
 						</Var>
 					</Vars>
@@ -29,38 +57,50 @@
 						<Var>
 							<Name>MAIN.Conveyor1</Name>
 							<Comment>
-								<![CDATA[ Conveyor 1 variables]]>
+								<![CDATA[ First conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.ElevatorConveyor</Name>
 							<Comment>
-								<![CDATA[ Elevator variables]]>
+								<![CDATA[ Elevator's conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.ElevatorTableUp</Name>
+							<Comment>
+								<![CDATA[ Move elevator's table up]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.ElevatorTableDown</Name>
+							<Comment>
+								<![CDATA[ Move elevator's table down]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.Conveyor2</Name>
 							<Comment>
-								<![CDATA[ Conveyor 2 variables]]>
+								<![CDATA[ Second conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.PusherPush</Name>
+							<Comment>
+								<![CDATA[ Push with pusher]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.PusherReset</Name>
+							<Name>MAIN.PusherRetract</Name>
+							<Comment>
+								<![CDATA[ Retract pusher]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>

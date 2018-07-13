@@ -5,27 +5,30 @@ using Assets.Scripts.TwinCAT;
 
 public class Product : MonoBehaviour {
 
-    private List<Conveyor> encounteredConveyers;
-    private Conveyor currentConveyor = null;
+    //private List<Conveyor> encounteredConveyers;
+    public Conveyor currentConveyor = null;
     private Rigidbody thisRigidBody;
-    private GameObject[] conveyorEndPoints;
-    private GameObject currentTarget = null;
+    public List<GameObject> conveyorEndPoints = new List<GameObject>();
+    public GameObject currentTarget = null;
+
+    [HideInInspector]
+    public bool IamMoving = false;
 
     void Start ()
     {
         thisRigidBody = GetComponent<Rigidbody>();
-        encounteredConveyers = new List<Conveyor>();
-        conveyorEndPoints = GameObject.FindGameObjectsWithTag("ConveyorEnd");
+        //encounteredConveyers = new List<Conveyor>();
+        //conveyorEndPoints = GameObject.FindGameObjectsWithTag("ConveyorEnd");
+        //GameObject[] holder = GameObject.FindGameObjectsWithTag("ConveyorEnd");
+        conveyorEndPoints.AddRange(GameObject.FindGameObjectsWithTag("ConveyorEnd"));
     }
 	
 
 	void Update ()
     {
-        OnConveyor();
-
-        if (currentTarget = null)
+        if (currentTarget == null)
         {
-            currentTarget = FindClosestGameObject(conveyorEndPoints);
+            currentTarget = FindClosestGameObject(conveyorEndPoints.ToArray());
             currentConveyor = currentTarget.gameObject.GetComponentInParent<Conveyor>();
         }
         else
@@ -40,33 +43,24 @@ public class Product : MonoBehaviour {
         {
             if ((bool)currentConveyor.conveyorOn.state)
             {
-                
-                thisRigidBody.transform.Translate(Vector3.left * 5);
+                IamMoving = true;
+                thisRigidBody.transform.Translate(Vector3.left * 0.1f);
             }
+            else
+            {
+                thisRigidBody.velocity = Vector3.zero;
+                thisRigidBody.angularVelocity = Vector3.zero;
+                IamMoving = false;
+            }
+                
         }
     }
 
-    void OnTriggerEnter(Collider collidedObject)
+    public void ReachedCheckPoint()
     {
-        if (collidedObject.gameObject.CompareTag("Conveyor"))
-        {
-            encounteredConveyers.Add(collidedObject.gameObject.GetComponentInChildren<Conveyor>());
-            currentConveyor = encounteredConveyers[0];
-        }
-    }
-
-    void OnTriggerExit(Collider collidedObject)
-    {
-        encounteredConveyers.RemoveAt(0);
-        if (encounteredConveyers.Count > 0)
-        {
-            currentConveyor = encounteredConveyers[0];
-        }
-        else
-        {
-            currentConveyor = null;
-        }
-        
+        conveyorEndPoints.Remove(currentTarget);
+        currentTarget = null;
+        currentConveyor = null;
     }
 
     GameObject FindClosestGameObject(GameObject[] gameObjecsToCheck)
@@ -77,6 +71,7 @@ public class Product : MonoBehaviour {
         foreach (GameObject go in gameObjecsToCheck)
         {
             Vector3 diff = go.transform.position - position;
+
             float curDistance = diff.sqrMagnitude;
             if (curDistance < distance)
             {
@@ -86,6 +81,6 @@ public class Product : MonoBehaviour {
         }
 
         return closest;
-    }
+    } 
 
 }

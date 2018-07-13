@@ -13,10 +13,15 @@ namespace Assets.Scripts.TwinCAT
         public int twincatAdsPort = 851;
         private TcAdsClient twincatAdsClient;
 
-        void Start()
+        void Awake()
         {
             twincatAdsClient = new TcAdsClient();
             twincatAdsClient.Connect(twincatAdsPort);
+        }
+
+        void Start()
+        {
+            
         }
 
         public void WriteToTwincat(string name, object state)

@@ -9,8 +9,14 @@ namespace Assets.Scripts.TwinCAT
         public string pusherName = "Pusher";
         public string programOrganizationUnit = "MAIN";
 
-        private TwinCATVariable pusherStart;
-        private TwinCATVariable pusherReset;
+        private int pusherPosition = 0;
+
+        private TwinCATVariable pusherPush;
+        private TwinCATVariable pusherRetract;
+
+        private TwinCATVariable pusherPushed;
+        private TwinCATVariable pusherRetracted;
+
         private TwinCAT_ADS twincatADS;
         Animator animator;
 
@@ -18,15 +24,19 @@ namespace Assets.Scripts.TwinCAT
 
         void Awake()
         {
-            pusherStart = new TwinCATVariable(pusherName + "Push", programOrganizationUnit);
-            pusherReset = new TwinCATVariable(pusherName + "Reset", programOrganizationUnit);
+            pusherPush = new TwinCATVariable(pusherName + "Push", programOrganizationUnit);
+            pusherRetract = new TwinCATVariable(pusherName + "Retract", programOrganizationUnit);
+            pusherPushed = new TwinCATVariable(pusherName + "Pushed", programOrganizationUnit);
+            pusherRetracted = new TwinCATVariable(pusherName + "Retracted", programOrganizationUnit);
             pusherMoving = false;
+            pusherRetracted.state = true;
         }
 
         void Start()
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
+            twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
         }
 
 
@@ -38,22 +48,50 @@ namespace Assets.Scripts.TwinCAT
 
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(pusherStart.name))
+            if (twincatADS.ReadFromTwincat(pusherPush.name) && pusherPosition == 0)
             {
                 pusherMoving = true;
+                pusherPosition = 1;
                 animator.SetTrigger("Pushing");
             }
 
-            if (twincatADS.ReadFromTwincat(pusherReset.name))
+            if (twincatADS.ReadFromTwincat(pusherRetract.name) && pusherPosition == 1)
             {
                 pusherMoving = true;
-                animator.SetTrigger("Returning");
+                pusherPosition = 0;
+                animator.SetTrigger("Retracting");
             }
         }
 
         public void AnimationFinished()
         {
             pusherMoving = false;
+            CheckAndWrite();
+        }
+
+        private void CheckAndWrite()
+        {
+            if (pusherPosition == 0)
+            {
+                pusherRetracted.state = true;
+                twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
+            }
+            else
+            {
+                pusherRetracted.state = false;
+                twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
+            }
+
+            if (pusherPosition == 1)
+            {
+                pusherPushed.state = true;
+                twincatADS.WriteToTwincat(pusherPushed.name, pusherPushed.state);
+            }
+            else
+            {
+                pusherPushed.state = false;
+                twincatADS.WriteToTwincat(pusherPushed.name, pusherPushed.state);
+            }
         }
 
     }

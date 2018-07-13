@@ -13,6 +13,8 @@ namespace Assets.Scripts.TwinCAT
         public string sensorName = "Sensor";
         public string programOrganizationUnit = "MAIN";
 
+        private GameObject shootingpoint;
+
         private TwinCATVariable sensor;
         private TwinCAT_ADS twincatADS;
         Animator animator;
@@ -28,29 +30,52 @@ namespace Assets.Scripts.TwinCAT
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
+            shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
+        }
+
+        private GameObject FindTagInChild(string tag)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.tag == tag)
+                {
+                    return child.gameObject;
+                }
+            }
+            return null;
         }
 
 
         void Update()
         {
-            var up = transform.TransformDirection(Vector3.up);
+            InfraredRay();
+        }
+
+        private void InfraredRay()
+        {
+            var direction = transform.TransformDirection(Vector3.forward);
             //note the use of var as the type. This is because in c# you 
             // can have lamda functions which open up the use of untyped variables
             //these variables can only live INSIDE a function. 
             RaycastHit hit;
-            Debug.DrawRay(transform.position, -up * 2, Color.green);
+            Debug.DrawRay(shootingpoint.transform.position, direction * 5, Color.red);
 
-            if (Physics.Raycast(transform.position, -up, out hit, 2))
+            if (Physics.Raycast(shootingpoint.transform.position, direction, out hit, 2))
             {
 
                 Debug.Log("HIT");
 
-                if (hit.collider.gameObject.name == "floor")
+                if (hit.collider.gameObject.name == "Product")
                 {
-                    Destroy(GetComponent("Rigidbody"));
+                    //Destroy(GetComponent("Rigidbody"));
+                    //Product product = hit.transform.gameObject.GetComponent<Product>();
+                    //product.IamMoving
+                    objectIsOnSensor = true;
+                    CheckAndWrite();
                 }
+                else
+                    objectIsOnSensor = false;
             }
-
         }
 
         private void CheckAndWrite()
