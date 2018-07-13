@@ -6,13 +6,15 @@ using Assets.Scripts.TwinCAT;
 public class Product : MonoBehaviour {
 
     //private List<Conveyor> encounteredConveyers;
-    public Conveyor currentConveyor = null;
+    private Conveyor currentConveyor = null;
     private Rigidbody thisRigidBody;
-    public List<GameObject> conveyorEndPoints = new List<GameObject>();
-    public GameObject currentTarget = null;
+    private List<GameObject> conveyorEndPoints = new List<GameObject>();
+    private GameObject currentTarget = null;
 
     [HideInInspector]
     public bool IamMoving = false;
+    [HideInInspector]
+    public float forceToBePushedWith = 1;
 
     void Start ()
     {
@@ -36,6 +38,32 @@ public class Product : MonoBehaviour {
             OnConveyor();
         }
 	}
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Pusher")
+        {
+            GameObject gameobject = transform.Find("Spatula/MyActualLocation").gameObject;
+            PushMe(collision, forceToBePushedWith);
+        }
+            
+    }
+    
+    public void PushMe(Collision collision, float force)
+    {
+        // Source: https://answers.unity.com/questions/1100879/push-object-in-opposite-direction-of-collision.html
+
+        // Calculate Angle Between the collision point and the player
+        Vector3 dir = collision.contacts[0].point - transform.position;
+        // We then get the opposite (-Vector3) and normalize it
+        dir = -dir.normalized;
+        Debug.Log(dir.ToString());
+        // And finally we add force in the direction of dir and multiply it by force. 
+        // This will push back the player
+        //thisRigidBody.AddForce(dir * force);
+        thisRigidBody.transform.Translate(dir * force);
+    }
+
 
     private void OnConveyor()
     {

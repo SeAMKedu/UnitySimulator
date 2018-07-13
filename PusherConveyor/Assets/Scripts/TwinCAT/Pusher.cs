@@ -18,7 +18,9 @@ namespace Assets.Scripts.TwinCAT
         private TwinCATVariable pusherRetracted;
 
         private TwinCAT_ADS twincatADS;
+        GameObject plate;
         Animator animator;
+        
 
         private bool pusherMoving;
 
@@ -37,6 +39,7 @@ namespace Assets.Scripts.TwinCAT
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
+            plate = transform.Find("Spatula/Plate").gameObject;
         }
 
 
@@ -45,7 +48,17 @@ namespace Assets.Scripts.TwinCAT
             if (!pusherMoving)
                 ReadAndCheck();
         }
-
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Product")
+            {
+                Product product = gameObject.GetComponent<Product>();
+                product.PushMe(collision, product.forceToBePushedWith);
+            }
+                
+        }
+        
         private void ReadAndCheck()
         {
             if (twincatADS.ReadFromTwincat(pusherPush.name) && pusherPosition == 0)

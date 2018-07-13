@@ -8,6 +8,7 @@ public class CheckPoint : MonoBehaviour
     public bool objectCanMove = false;
     private Product product = null;
 
+    private bool keepChecking = false;
 
     void Start ()
     {
@@ -16,7 +17,15 @@ public class CheckPoint : MonoBehaviour
 	
 	void Update ()
     {
-		
+        if (keepChecking)
+        {
+            if (product.IamMoving == false && objectCanMove == false)
+            {
+                product.ReachedCheckPoint();
+                keepChecking = false;
+            }
+                
+        }
 	}
 
     void OnTriggerEnter(Collider collidedObject)
@@ -32,12 +41,7 @@ public class CheckPoint : MonoBehaviour
 
             else if (product.IamMoving == true && objectCanMove == false)
             {
-                do
-                {
-                    if (product.IamMoving == false)
-                        product.ReachedCheckPoint();
-
-                } while (product.IamMoving);
+                keepChecking = true;
             }
 
         }

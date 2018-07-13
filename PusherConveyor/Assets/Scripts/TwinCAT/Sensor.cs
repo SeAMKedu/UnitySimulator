@@ -20,6 +20,7 @@ namespace Assets.Scripts.TwinCAT
         Animator animator;
 
         private bool objectIsOnSensor = false;
+        private int sensorState = 0;
 
         void Awake()
         {
@@ -32,19 +33,6 @@ namespace Assets.Scripts.TwinCAT
             animator = GetComponent<Animator>();
             shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
         }
-
-        private GameObject FindTagInChild(string tag)
-        {
-            foreach (Transform child in transform)
-            {
-                if (child.gameObject.tag == tag)
-                {
-                    return child.gameObject;
-                }
-            }
-            return null;
-        }
-
 
         void Update()
         {
@@ -65,30 +53,36 @@ namespace Assets.Scripts.TwinCAT
 
                 Debug.Log("HIT");
 
-                if (hit.collider.gameObject.name == "Product")
+                if (hit.collider.gameObject.tag == "Product")
                 {
                     //Destroy(GetComponent("Rigidbody"));
                     //Product product = hit.transform.gameObject.GetComponent<Product>();
                     //product.IamMoving
                     objectIsOnSensor = true;
+                    sensorState = 1;
                     CheckAndWrite();
                 }
                 else
+                {
                     objectIsOnSensor = false;
+                    sensorState = 0;
+                    CheckAndWrite();
+                }
+                    
             }
         }
 
         private void CheckAndWrite()
         {
-            if (objectIsOnSensor)
+            if (objectIsOnSensor && sensorState == 0)
             {
-                animator.SetTrigger("Hit");
+                //animator.SetTrigger("Hit");
                 sensor.state = true;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }
-            else
+            if (!objectIsOnSensor && sensorState == 1)
             {
-                animator.SetTrigger("Normal");
+                //animator.SetTrigger("Normal");
                 sensor.state = false;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }

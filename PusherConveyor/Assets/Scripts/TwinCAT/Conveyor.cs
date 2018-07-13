@@ -42,46 +42,6 @@ namespace Assets.Scripts.TwinCAT
                 conveyorOn.state = false;
             }
         }
-        /*
-        private void MoveObject(Collision hit)
-        {
-            hit.transform.Translate(Vector3.left*5);
-        }
 
-        void OnCollisionStay(Collision hit)
-        {
-            if (hit.gameObject.tag == "Product")
-            {
-                Debug.Log(conveyorOn.state);
-                if ((bool)conveyorOn.state)
-                    MoveObject(hit);
-            }
-        }
-        */
-
-        /*
-        void OnTriggerStay(Collider hit)
-        {
-            
-        }
-        */
-
-        /*
-        void OnCollisionExit(Collision leaver)
-        {
-            leaver.transform.Translate(Vector3.left * 50);
-        }
-        */
-        /*
-        void OnCollisionEnter(Collision collidedObject)
-        {
-            //objectToMove = collidedObject.rigidbody;
-        }
-
-        void OnTriggerEnter()
-        {
-
-        }
-        */
     }
 }
