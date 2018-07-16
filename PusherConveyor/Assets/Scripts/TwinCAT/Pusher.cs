@@ -19,6 +19,7 @@ namespace Assets.Scripts.TwinCAT
 
         private TwinCAT_ADS twincatADS;
         GameObject plate;
+        GameObject location;
         Animator animator;
         
 
@@ -40,6 +41,7 @@ namespace Assets.Scripts.TwinCAT
             animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
             plate = transform.Find("Spatula/Plate").gameObject;
+            location = transform.Find("Spatula/MyActualLocation").gameObject;
         }
 
 
@@ -54,7 +56,7 @@ namespace Assets.Scripts.TwinCAT
             if (collision.gameObject.tag == "Product")
             {
                 Product product = gameObject.GetComponent<Product>();
-                product.PushMe(collision, product.forceToBePushedWith);
+                product.PushMe(location, product.forceToBePushedWith);
             }
                 
         }

@@ -14,7 +14,7 @@ public class Product : MonoBehaviour {
     [HideInInspector]
     public bool IamMoving = false;
     [HideInInspector]
-    public float forceToBePushedWith = 1;
+    public float forceToBePushedWith = 0.001f;
 
     void Start ()
     {
@@ -23,11 +23,13 @@ public class Product : MonoBehaviour {
         //conveyorEndPoints = GameObject.FindGameObjectsWithTag("ConveyorEnd");
         //GameObject[] holder = GameObject.FindGameObjectsWithTag("ConveyorEnd");
         conveyorEndPoints.AddRange(GameObject.FindGameObjectsWithTag("ConveyorEnd"));
+        
     }
 	
 
 	void Update ()
     {
+        
         if (currentTarget == null)
         {
             currentTarget = FindClosestGameObject(conveyorEndPoints.ToArray());
@@ -37,17 +39,51 @@ public class Product : MonoBehaviour {
         {
             OnConveyor();
         }
+        
 	}
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Pusher")
         {
-            GameObject gameobject = transform.Find("Spatula/MyActualLocation").gameObject;
-            PushMe(collision, forceToBePushedWith);
+            //GameObject gameobject = transform.Find("Spatula/MyActualLocation").gameObject;
+            GameObject gameobject = GameObject.FindGameObjectWithTag("PusherLocation");
+            PushMe(gameobject, forceToBePushedWith);
         }
-            
     }
+    /*
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.transform.parent != null)
+        {
+            if (collision.gameObject.transform.parent.gameObject.name == "ShakingPart")
+            {
+                ShakeMe();
+            }
+        }
+
+    }
+    */
+    public void ShakeMe()
+    {
+        
+        thisRigidBody.AddForce(new Vector3(
+                               Random.Range(-10, 11), 
+                               0, 
+                               Random.Range(-10, 11)
+                               ) * 10);
+        
+        //thisRigidBody.AddForce( new Vector3((Mathf.Sin(Time.time * 1f) * 5), 0, 0));
+        //thisRigidBody.AddForce()
+
+    }
+
+    public void PushMe(GameObject gameobject, float force)
+    {
+        //thisRigidBody.AddForce(Vector3.forward * 350);
+        thisRigidBody.velocity = (Vector3.forward * 10);
+    }
+
     
     public void PushMe(Collision collision, float force)
     {
@@ -63,7 +99,7 @@ public class Product : MonoBehaviour {
         //thisRigidBody.AddForce(dir * force);
         thisRigidBody.transform.Translate(dir * force);
     }
-
+    
 
     private void OnConveyor()
     {
@@ -76,8 +112,8 @@ public class Product : MonoBehaviour {
             }
             else
             {
-                thisRigidBody.velocity = Vector3.zero;
-                thisRigidBody.angularVelocity = Vector3.zero;
+                //thisRigidBody.velocity = Vector3.zero;
+                //thisRigidBody.angularVelocity = Vector3.zero;
                 IamMoving = false;
             }
                 

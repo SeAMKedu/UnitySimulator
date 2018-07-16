@@ -12,6 +12,8 @@ TagManager:
   - InfraredRay
   - ShootingPoint
   - Pusher
+  - PusherLocation
+  - BoxShaker
   layers:
   - Default
   - TransparentFX

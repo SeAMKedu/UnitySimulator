@@ -2,6 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.22">
 	<Project ProjectGUID="{7242729C-47F8-49A3-9CF5-FED9D30F7D8E}" Target64Bit="true" ShowHideConfigurations="#x306">
 		<System>
+			<Settings DontCheckTarget="192.168.98.1.1.1"/>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -39,16 +40,22 @@
 						<Var>
 							<Name>MAIN.Conveyor2Sensor</Name>
 							<Comment>
-								<![CDATA[ Conveyor 2 inputs]]>
+								<![CDATA[ Sensor attached to second conveyor]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.PusherPushed</Name>
+							<Comment>
+								<![CDATA[ Pusher is pushed]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.PusherRetracted</Name>
+							<Comment>
+								<![CDATA[ Pusher is retracted]]>
+							</Comment>
 							<Type>BIT</Type>
 						</Var>
 					</Vars>
@@ -106,7 +113,7 @@
 						<Var>
 							<Name>MAIN.BoxShaker</Name>
 							<Comment>
-								<![CDATA[ Box variables]]>
+								<![CDATA[ Shake the box]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>

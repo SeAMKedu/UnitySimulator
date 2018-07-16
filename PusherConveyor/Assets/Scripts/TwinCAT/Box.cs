@@ -13,7 +13,7 @@ namespace Assets.Scripts.TwinCAT
         private TwinCAT_ADS twincatADS;
         Animator animator;
 
-        private bool boxIsShaking;
+        public bool boxIsShaking;
 
         void Awake()
         {
@@ -48,6 +48,19 @@ namespace Assets.Scripts.TwinCAT
             animator.SetTrigger("Still");
             boxIsShaking = false;
         }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            if (collision.gameObject.tag == "Product")
+            {
+                if (boxIsShaking)
+                {
+                    Product product = collision.gameObject.GetComponent<Product>();
+                    product.ShakeMe();
+                }
+            }
+        }
+
 
     }
 }

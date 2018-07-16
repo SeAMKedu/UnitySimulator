@@ -296,6 +296,7 @@ MonoBehaviour:
     - {fileID: 1107834790118354064, guid: 2ed29ac150008354cabe9838eab0801b, type: 2}
     - {fileID: 1107771022895238548, guid: 47e00fc4507851a438ad292d6d5033b0, type: 2}
     - {fileID: 1107871587963891974, guid: d428b87bdf4def448b71d88c913f4423, type: 2}
+    - {fileID: 1107625368043275238, guid: cb08c0ea74b11d14ea524d1e8e65399f, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.7035229
       e01: 0
@@ -337,6 +338,22 @@ MonoBehaviour:
       e11: 1
       e12: 0
       e13: 50
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
       e20: 0
       e21: 0
       e22: 1
@@ -485,19 +502,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts
+    - Assets/Animation/Product/Cylinder
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Animation/Product/Cylinder
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\k5000395\Documents\GitHub\SeAMK-IoTTi-PusherConveyor\PusherConveyor
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: da270000
-    m_LastClickedID: 10202
-    m_ExpandedIDs: 000000007827000090270000da270000
+    m_SelectedIDs: ceb00000
+    m_LastClickedID: 45262
+    m_ExpandedIDs: 000000007827000092270000e2270000ccb0000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -525,7 +542,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007827000090270000da270000
+    m_ExpandedIDs: 000000007827000092270000e2270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -550,9 +567,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4c2d0000
-    m_LastClickedInstanceID: 11596
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 802d0000
+    m_LastClickedInstanceID: 11648
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -642,10 +659,10 @@ MonoBehaviour:
     height: 554
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-    scrollPos: {x: 0, y: 727}
-    m_SelectedIDs: 0444f9ff
-    m_LastClickedID: -441340
-    m_ExpandedIDs: 9efbffff000000005a2b0000c42c0000222d0000842d0000b02e0000442f00005c2f0000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 282e0000
+    m_LastClickedID: 11816
+    m_ExpandedIDs: 9efbffff00000000d82c0000362d0000802d0000982d0000282e0000782f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -701,9 +718,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -7.916766, y: 6.449916, z: -3.926506}
+    m_Target: {x: -8.729589, y: -0.33006096, z: 7.3912525}
     speed: 2
-    m_Value: {x: -7.916766, y: 6.449916, z: -3.926506}
+    m_Value: {x: -8.729589, y: -0.33006096, z: 7.3912525}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -727,13 +744,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.0067755766, y: 0.70642644, z: -0.7077217, w: 0.006764278}
+    m_Target: {x: -0.0013679286, y: 0.8260022, z: -0.5636617, w: -0.0020032523}
     speed: 2
-    m_Value: {x: 0.0067755766, y: 0.70642644, z: -0.7077217, w: 0.006764278}
+    m_Value: {x: -0.0013679287, y: 0.82600224, z: -0.56366175, w: -0.0020032525}
   m_Size:
-    m_Target: 4.669154
+    m_Target: 17.935425
     speed: 2
-    m_Value: 4.669154
+    m_Value: 17.935425
   m_Ortho:
     m_Target: 0
     speed: 2
