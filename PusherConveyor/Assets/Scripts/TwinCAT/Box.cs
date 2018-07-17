@@ -55,8 +55,13 @@ namespace Assets.Scripts.TwinCAT
             {
                 if (boxIsShaking)
                 {
-                    Product product = collision.gameObject.GetComponent<Product>();
-                    product.ShakeMe();
+                    if(collision.rigidbody.velocity == new Vector3(0, 0, 0))
+                    {
+                        Debug.Log("Shake thyself");
+                        Product product = collision.gameObject.GetComponent<Product>();
+                        product.ShakeMe();
+                    }
+                    
                 }
             }
         }
