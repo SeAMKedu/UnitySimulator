@@ -18,7 +18,6 @@ namespace Assets.Scripts.TwinCAT
         private TwinCATVariable pusherRetracted;
 
         private TwinCAT_ADS twincatADS;
-        GameObject plate;
         GameObject location;
         Animator animator;
         
@@ -40,7 +39,7 @@ namespace Assets.Scripts.TwinCAT
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
-            plate = transform.Find("Spatula/Plate").gameObject;
+            twincatADS.WriteToTwincat(pusherPushed.name, pusherPushed.state);
             location = transform.Find("Spatula/MyActualLocation").gameObject;
         }
 

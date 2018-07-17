@@ -37,6 +37,7 @@ namespace Assets.Scripts.TwinCAT
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state);
+            twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state);
         }
 
 

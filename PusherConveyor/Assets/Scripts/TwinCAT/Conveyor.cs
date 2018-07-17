@@ -33,12 +33,12 @@ namespace Assets.Scripts.TwinCAT
         {
             if (twincatADS.ReadFromTwincat(conveyorOn.name) && (bool)conveyorOn.state == false)
             {
-                Debug.Log("Conveyer is on");
+                Debug.Log(conveyorName + " is on");
                 conveyorOn.state = true;
             }
             if (twincatADS.ReadFromTwincat(conveyorOn.name) == false && (bool)conveyorOn.state)
             {
-                Debug.Log("Conveyer is off");
+                Debug.Log(conveyorName + " is off");
                 conveyorOn.state = false;
             }
         }

@@ -33,7 +33,8 @@ public class Product : MonoBehaviour {
         if (currentTarget == null)
         {
             currentTarget = FindClosestGameObject(conveyorEndPoints.ToArray());
-            currentConveyor = currentTarget.gameObject.GetComponentInParent<Conveyor>();
+            if (currentTarget != null)
+                currentConveyor = currentTarget.gameObject.GetComponentInParent<Conveyor>();
         }
         else
         {
@@ -72,10 +73,7 @@ public class Product : MonoBehaviour {
                                0, 
                                Random.Range(-10, 11)
                                ) * 10);
-        
-        //thisRigidBody.AddForce( new Vector3((Mathf.Sin(Time.time * 1f) * 5), 0, 0));
-        //thisRigidBody.AddForce()
-
+       
     }
 
     public void PushMe(GameObject gameobject, float force)
@@ -111,11 +109,7 @@ public class Product : MonoBehaviour {
                 thisRigidBody.transform.Translate(Vector3.left * 0.1f);
             }
             else
-            {
-                //thisRigidBody.velocity = Vector3.zero;
-                //thisRigidBody.angularVelocity = Vector3.zero;
                 IamMoving = false;
-            }
                 
         }
     }

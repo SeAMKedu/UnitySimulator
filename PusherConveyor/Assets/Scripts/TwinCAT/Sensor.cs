@@ -14,6 +14,9 @@ namespace Assets.Scripts.TwinCAT
         public string programOrganizationUnit = "MAIN";
 
         private GameObject shootingpoint;
+        private GameObject infraredRay;
+        private Vector3 infraredRayDefaultEnd;
+        private Vector3 infraredRayCurrentEnd;
 
         private TwinCATVariable sensor;
         private TwinCAT_ADS twincatADS;
@@ -31,7 +34,13 @@ namespace Assets.Scripts.TwinCAT
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
+            twincatADS.WriteToTwincat(sensor.name, sensor.state);
             shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
+
+            infraredRayDefaultEnd = new Vector3(shootingpoint.transform.position.x, shootingpoint.transform.position.y, 0.4f);
+            infraredRayCurrentEnd = infraredRayDefaultEnd;
+
+            infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
         }
 
         void Update()
@@ -46,31 +55,53 @@ namespace Assets.Scripts.TwinCAT
             // can have lamda functions which open up the use of untyped variables
             //these variables can only live INSIDE a function. 
             RaycastHit hit;
-            Debug.DrawRay(shootingpoint.transform.position, direction * 5, Color.red);
+            //Debug.DrawRay(shootingpoint.transform.position, direction * 5, Color.red);
 
-            if (Physics.Raycast(shootingpoint.transform.position, direction, out hit, 2))
+            if (Physics.Raycast(shootingpoint.transform.position, direction, out hit, 5))
             {
+                infraredRayCurrentEnd = infraredRayDefaultEnd;
+                infraredRayCurrentEnd.z = hit.transform.position.z;
+                Destroy(infraredRay);
+                infraredRay = DrawLine(shootingpoint.transform.position, infraredRayCurrentEnd, Color.red);
 
                 Debug.Log("HIT");
 
                 if (hit.collider.gameObject.tag == "Product")
                 {
-                    //Destroy(GetComponent("Rigidbody"));
-                    //Product product = hit.transform.gameObject.GetComponent<Product>();
-                    //product.IamMoving
                     objectIsOnSensor = true;
-                    sensorState = 1;
                     CheckAndWrite();
-                }
-                else
-                {
-                    objectIsOnSensor = false;
-                    sensorState = 0;
-                    CheckAndWrite();
-                }
-                    
+                }         
             }
+            else
+            {
+                if (infraredRayCurrentEnd != infraredRayDefaultEnd)
+                {
+                    Destroy(infraredRay);
+                    infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
+                }
+                objectIsOnSensor = false;
+                CheckAndWrite();
+            }
+
         }
+
+        GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
+        {
+            GameObject myLine = new GameObject();
+            myLine.transform.position = start;
+            myLine.AddComponent<LineRenderer>();
+            LineRenderer lr = myLine.GetComponent<LineRenderer>();
+            lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
+            lr.startColor = color;
+            lr.endColor = color;
+            lr.startWidth = 0.1f;
+            lr.endWidth = 0.1f;
+            lr.SetPosition(0, start);
+            lr.SetPosition(1, end);
+            //GameObject.Destroy(myLine, duration);
+            return myLine;
+        }
+
 
         private void CheckAndWrite()
         {
@@ -78,11 +109,13 @@ namespace Assets.Scripts.TwinCAT
             {
                 //animator.SetTrigger("Hit");
                 sensor.state = true;
+                sensorState = 1;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }
             if (!objectIsOnSensor && sensorState == 1)
             {
                 //animator.SetTrigger("Normal");
+                sensorState = 0;
                 sensor.state = false;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }
