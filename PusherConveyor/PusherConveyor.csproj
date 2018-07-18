@@ -316,6 +316,7 @@
     <Compile Include="Assets\Scripts\FlyingCamera.cs" />
     <Compile Include="Assets\Scripts\Models\TwinCATVariable.cs" />
     <Compile Include="Assets\Scripts\Product.cs" />
+    <Compile Include="Assets\Scripts\Restart.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Box.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Conveyor.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\ConveyorBelt.cs" />

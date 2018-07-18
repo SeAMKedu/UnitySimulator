@@ -13,12 +13,12 @@ namespace Assets.Scripts.TwinCAT
         private TwinCAT_ADS twincatADS;
         Animator animator;
 
-        public bool boxIsShaking;
+        [HideInInspector]
+        public bool boxIsShaking = false;
 
         void Awake()
         {
             boxShaker = new TwinCATVariable(boxShakerName, programOrganizationUnit);
-            boxIsShaking = false;
         }
 
         void Start()

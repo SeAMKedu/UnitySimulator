@@ -32,13 +32,14 @@ namespace Assets.Scripts.TwinCAT
         void Start()
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
-            twincatADS.WriteToTwincat(sensor.name, sensor.state);
+            
+            // Infrared 
             shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
-
             infraredRayDefaultEnd = new Vector3(shootingpoint.transform.position.x, shootingpoint.transform.position.y, 0.4f);
             infraredRayCurrentEnd = infraredRayDefaultEnd;
-
             infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
+
+            twincatADS.WriteToTwincat(sensor.name, sensor.state);
         }
 
         void Update()

@@ -151,4 +151,4 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 c77785d6d614f165d09180e30c3046e2 Assembly-CSharp.dll:.CheckPoint
 56b5917d33681973c9df4b1ec9b673cb Assembly-CSharp.dll:Assets.Scripts.TwinCAT.Conveyor
 1f2b598b716e9a0b37c1dcf7011759db Assembly-CSharp.dll:Assets.Scripts.TwinCAT.Elevator
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainBox
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Restart

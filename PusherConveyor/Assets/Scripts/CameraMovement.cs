@@ -18,8 +18,8 @@ public class CameraMovement : MonoBehaviour
     // Source: https://gist.github.com/gunderson/d7f096bd07874f31671306318019d996
 
     float mainSpeed = 50.0f; //regular speed
-    float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
-    float maxShift = 1000.0f; //Maximum speed when holdin gshift
+    float shiftAdd = 50.0f; //multiplied by how long shift is held.  Basically running
+    float maxShift = 100.0f; //Maximum speed when holdin gshift
     float camSens = 0.25f; //How sensitive it with mouse
     private float totalRun = 1.0f;
     #endregion
