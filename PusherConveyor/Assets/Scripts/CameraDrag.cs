@@ -6,7 +6,7 @@ public class CameraDrag : MonoBehaviour
 {
     // Source: https://forum.unity.com/threads/click-drag-camera-movement.39513/
 
-    public float dragSpeed = 20;
+    public float dragSpeed = 2;
     private Vector3 dragOrigin;
 
 

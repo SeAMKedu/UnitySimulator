@@ -5,11 +5,14 @@ using Assets.Scripts.TwinCAT;
 
 public class Product : MonoBehaviour {
 
-    //private List<Conveyor> encounteredConveyers;
-    private Conveyor currentConveyor = null;
     private Rigidbody thisRigidBody;
+    private GameObject spawnlocation;
+
+    private Conveyor currentConveyor = null;
     private List<GameObject> conveyorEndPoints = new List<GameObject>();
     private GameObject currentTarget = null;
+
+    private bool clonedMyself = false;
 
     [HideInInspector]
     public bool IamMoving = false;
@@ -18,12 +21,9 @@ public class Product : MonoBehaviour {
 
     void Start ()
     {
+        spawnlocation = GameObject.FindGameObjectWithTag("Respawn");
         thisRigidBody = GetComponent<Rigidbody>();
-        //encounteredConveyers = new List<Conveyor>();
-        //conveyorEndPoints = GameObject.FindGameObjectsWithTag("ConveyorEnd");
-        //GameObject[] holder = GameObject.FindGameObjectsWithTag("ConveyorEnd");
         conveyorEndPoints.AddRange(GameObject.FindGameObjectsWithTag("ConveyorEnd"));
-        
     }
 	
 
@@ -42,16 +42,38 @@ public class Product : MonoBehaviour {
         }
         
 	}
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Pusher")
         {
             //GameObject gameobject = transform.Find("Spatula/MyActualLocation").gameObject;
-            GameObject gameobject = GameObject.FindGameObjectWithTag("PusherLocation");
-            PushMe(gameobject, forceToBePushedWith);
+            PushMe(forceToBePushedWith);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("I am triggered by " + other.name);
+        if (!clonedMyself)
+        {
+            if (other.tag == "ConveyorBelt")
+            {
+                Debug.Log("Out of bounds");
+                Instantiate(gameObject, spawnlocation.transform.position, new Quaternion(0, 0, 0, 0));
+                Destroy(gameObject, 10);
+                clonedMyself = true;
+            }
+            else if (other.CompareTag("Box"))
+            {
+                Debug.Log("Inside box");
+                ReachedCheckPoint();
+                Instantiate(gameObject, spawnlocation.transform.position, new Quaternion(0, 0, 0, 0));
+                clonedMyself = true;
+            }
+        }
+    }
+
     /*
     private void OnCollisionStay(Collision collision)
     {
@@ -76,7 +98,7 @@ public class Product : MonoBehaviour {
        
     }
 
-    public void PushMe(GameObject gameobject, float force)
+    public void PushMe(float force)
     {
         //thisRigidBody.AddForce(Vector3.forward * 350);
         thisRigidBody.velocity = (Vector3.forward * 10);

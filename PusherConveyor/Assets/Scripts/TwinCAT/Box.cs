@@ -49,6 +49,11 @@ namespace Assets.Scripts.TwinCAT
             boxIsShaking = false;
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.name + " triggered me!");
+        }
+
         private void OnCollisionStay(Collision collision)
         {
             if (collision.gameObject.tag == "Product")

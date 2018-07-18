@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TwinCAT.Ads;
+﻿using TwinCAT.Ads;
 using UnityEngine;
+using Assets.Scripts.Models;
 
 namespace Assets.Scripts.TwinCAT
 {
@@ -12,6 +8,7 @@ namespace Assets.Scripts.TwinCAT
     {
         public int twincatAdsPort = 851;
         private TcAdsClient twincatAdsClient;
+        private TwinCATVariable conveyorBeltStarted;
 
         void Awake()
         {

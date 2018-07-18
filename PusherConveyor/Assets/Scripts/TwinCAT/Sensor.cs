@@ -20,7 +20,6 @@ namespace Assets.Scripts.TwinCAT
 
         private TwinCATVariable sensor;
         private TwinCAT_ADS twincatADS;
-        Animator animator;
 
         private bool objectIsOnSensor = false;
         private int sensorState = 0;
@@ -33,7 +32,6 @@ namespace Assets.Scripts.TwinCAT
         void Start()
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
-            animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(sensor.name, sensor.state);
             shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
 
@@ -74,6 +72,7 @@ namespace Assets.Scripts.TwinCAT
             }
             else
             {
+                // Check whethever the default infrared has been created or not. No use destroying and creating it each frame.
                 if (infraredRayCurrentEnd != infraredRayDefaultEnd)
                 {
                     Destroy(infraredRay);
@@ -88,6 +87,7 @@ namespace Assets.Scripts.TwinCAT
         GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
         {
             GameObject myLine = new GameObject();
+            myLine.name = sensor.name + " infrared light";
             myLine.transform.position = start;
             myLine.AddComponent<LineRenderer>();
             LineRenderer lr = myLine.GetComponent<LineRenderer>();
@@ -107,14 +107,12 @@ namespace Assets.Scripts.TwinCAT
         {
             if (objectIsOnSensor && sensorState == 0)
             {
-                //animator.SetTrigger("Hit");
                 sensor.state = true;
                 sensorState = 1;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }
             if (!objectIsOnSensor && sensorState == 1)
             {
-                //animator.SetTrigger("Normal");
                 sensorState = 0;
                 sensor.state = false;
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);

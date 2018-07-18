@@ -3486,8 +3486,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 151.30782, z: 10.000038}
-  m_Center: {x: -770, y: 774.3454, z: -407.374}
+  m_Size: {x: 300, y: 151.30782, z: 12.680173}
+  m_Center: {x: -770, y: 774.3454, z: -406.03384}
 --- !u!54 &518521130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3514,8 +3514,7 @@ GameObject:
   - component: {fileID: 543238201}
   - component: {fileID: 543238200}
   - component: {fileID: 543238199}
-  - component: {fileID: 543238203}
-  - component: {fileID: 543238204}
+  - component: {fileID: 543238205}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3586,7 +3585,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 192, z: 0}
---- !u!114 &543238203
+--- !u!114 &543238205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3594,21 +3593,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 543238198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe58f323ea6f51b42b287b5642264af4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8065eeb33bb8229439ec24d1e7e9e7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraLocked: 1
   dragSpeed: 2
---- !u!114 &543238204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 543238198}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5162117a4298954f9a629cc8cdbb6cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &545610975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,6 +4428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781840479}
   - component: {fileID: 781840480}
+  - component: {fileID: 781840481}
   m_Layer: 0
   m_Name: ConveyorBelt
   m_TagString: ConveyorBelt
@@ -4476,6 +4466,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   twincatAdsPort: 851
+--- !u!65 &781840481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 781840478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6589.553, y: 100, z: 6087.6406}
+  m_Center: {x: 0, y: 0, z: 5.6699753}
 --- !u!1 &822101114
 GameObject:
   m_ObjectHideFlags: 0
@@ -6811,6 +6813,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 54518742980268558, guid: a4053c0e9400dc046b1f05d04162f25b,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016732431222402, guid: a4053c0e9400dc046b1f05d04162f25b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4053c0e9400dc046b1f05d04162f25b, type: 2}
   m_IsPrefabParent: 0
@@ -7610,9 +7621,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1389143865}
   - component: {fileID: 1389143866}
+  - component: {fileID: 1389143867}
   m_Layer: 0
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7644,6 +7656,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 787.6694, y: 543.4957, z: 740.26355}
   m_Center: {x: -773.13385, y: 433.9274, z: 770.9964}
+--- !u!54 &1389143867
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389143864}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1416372786
 GameObject:
   m_ObjectHideFlags: 0

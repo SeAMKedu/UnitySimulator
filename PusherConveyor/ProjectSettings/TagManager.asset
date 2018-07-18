@@ -14,6 +14,7 @@ TagManager:
   - Pusher
   - PusherLocation
   - BoxShaker
+  - Box
   layers:
   - Default
   - TransparentFX
