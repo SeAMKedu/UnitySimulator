@@ -77,7 +77,7 @@ public class CameraMovement : MonoBehaviour
         //Keyboard commands
         //float f = 0.0f;
         Vector3 p = GetBaseInput();
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetButton("Increase flying speed"))
         {
             totalRun += Time.deltaTime;
             p = p * totalRun * shiftAdd;
@@ -93,7 +93,7 @@ public class CameraMovement : MonoBehaviour
 
         p = p * Time.deltaTime;
         Vector3 newPosition = transform.position;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButton("Lock flying height"))
         { //If player wants to move on X and Z axis only
             transform.Translate(p);
             newPosition.x = transform.position.x;
@@ -109,19 +109,19 @@ public class CameraMovement : MonoBehaviour
     private Vector3 GetBaseInput()
     { //returns the basic values, if it's 0 than it's not active.
         Vector3 p_Velocity = new Vector3();
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetAxisRaw("Vertical") == 1)
         {
             p_Velocity += new Vector3(0, 0, 1);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetAxisRaw("Vertical") == -1)
         {
             p_Velocity += new Vector3(0, 0, -1);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetAxisRaw("Horizontal") == -1)
         {
             p_Velocity += new Vector3(-1, 0, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetAxisRaw("Horizontal") == 1)
         {
             p_Velocity += new Vector3(1, 0, 0);
         }

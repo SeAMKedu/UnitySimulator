@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour 
 {
-    public void RestartGame()
+    public void RestartSimulation()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
     }

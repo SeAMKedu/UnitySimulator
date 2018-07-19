@@ -12,13 +12,16 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -310,13 +313,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraDrag.cs" />
-    <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraDrag.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\FlyingCamera.cs" />
     <Compile Include="Assets\Scripts\CheckPoint.cs" />
-    <Compile Include="Assets\Scripts\FlyingCamera.cs" />
     <Compile Include="Assets\Scripts\Models\TwinCATVariable.cs" />
     <Compile Include="Assets\Scripts\Product.cs" />
-    <Compile Include="Assets\Scripts\Restart.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Box.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Conveyor.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\ConveyorBelt.cs" />
@@ -324,6 +326,9 @@
     <Compile Include="Assets\Scripts\TwinCAT\Pusher.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\Sensor.cs" />
     <Compile Include="Assets\Scripts\TwinCAT\TwinCAT_ADS.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Quit.cs" />
+    <Compile Include="Assets\Scripts\UI\Restart.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
