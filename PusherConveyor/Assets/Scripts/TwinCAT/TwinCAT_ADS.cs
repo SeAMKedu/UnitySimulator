@@ -16,25 +16,35 @@ namespace Assets.Scripts.TwinCAT
             twincatAdsClient.Connect(twincatAdsPort);
         }
 
-        public void WriteToTwincat(string name, object state)
+        public bool WriteToTwincat(string name, object state)
         {
             try
             {
                 Debug.Log("Wrote: " + name + " to " + state.ToString());
                 twincatAdsClient.WriteAny(twincatAdsClient.CreateVariableHandle(name), state);
+                return true;
             }
             catch (AdsErrorException)
             {
                 Debug.Log("TwinCAT is not running.");
-
+                return false;
             }
             
         }
 
-        public void WriteToTwincat(TwinCATVariable twinCATVariable)
+        public bool WriteToTwincat(TwinCATVariable twinCATVariable)
         {
-            Debug.Log("Wrote: " + name + " to " + twinCATVariable.ToString());
-            twincatAdsClient.WriteAny(twincatAdsClient.CreateVariableHandle(twinCATVariable.name), twinCATVariable.state);
+            try
+            {
+                Debug.Log("Wrote: " + name + " to " + twinCATVariable.ToString());
+                twincatAdsClient.WriteAny(twincatAdsClient.CreateVariableHandle(twinCATVariable.name), twinCATVariable.state);
+                return true;
+            }
+            catch (AdsErrorException)
+            {
+                Debug.Log("TwinCAT is not running.");
+                return false;
+            }
         }
 
         public bool ReadFromTwincat(string name)

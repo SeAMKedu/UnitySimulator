@@ -22,8 +22,10 @@ public class PivotManager
     static Mesh selectedObjectMesh;
     static Vector3 selectedObjectPivot;
 
-    [MenuItem("GameObject/Center Pivot _c")]
-    [MenuItem("CONTEXT/Transform/Center Pivot _c")]
+    //[MenuItem("GameObject/Center Pivot _c")]
+    //[MenuItem("CONTEXT/Transform/Center Pivot _c")]
+    [MenuItem("GameObject/Center Pivot %#&c")]
+    [MenuItem("CONTEXT/Transform/Center Pivot %#&c")]
     static void CenterPivot()
     {
         RecognizeSelectedObject();

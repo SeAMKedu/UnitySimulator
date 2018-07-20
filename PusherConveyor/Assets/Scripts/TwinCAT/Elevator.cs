@@ -10,6 +10,8 @@ namespace Assets.Scripts.TwinCAT
         public string programOrganizationUnit = "MAIN";
 
         private int elevatorPosition = 0;
+        private bool elevatorMoving = false;
+        private bool writeSucceeded = true;
 
         private TwinCATVariable elevatorTableUp;
         private TwinCATVariable elevatorTableDown;
@@ -20,31 +22,49 @@ namespace Assets.Scripts.TwinCAT
         private TwinCAT_ADS twincatADS;
         Animator animator;
 
-        private bool elevatorMoving;
-
         void Awake()
         {
             elevatorTableUp = new TwinCATVariable(elevatorName + "TableUp", programOrganizationUnit);
             elevatorTableDown = new TwinCATVariable(elevatorName + "TableDown", programOrganizationUnit);
             elevatorTableIsLifted = new TwinCATVariable(elevatorName + "TableIsLifted", programOrganizationUnit);
             elevatorTableIsDescended = new TwinCATVariable(elevatorName + "TableIsDescended", programOrganizationUnit);
-            elevatorMoving = false;
-            elevatorTableIsDescended.state = true;
         }
 
         void Start()
         {
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             animator = GetComponent<Animator>();
-            twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state);
-            twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state);
+            Setup();
         }
 
+        private void Setup()
+        {
+            elevatorTableIsDescended.state = true;
+            elevatorTableIsLifted.state = false;
+            if (twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state)
+             && twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+                writeSucceeded = true;
+
+            else
+                writeSucceeded = false;
+        }
 
         void Update()
         {
-            if(!elevatorMoving)
-                ReadAndCheck();
+            if (!writeSucceeded)
+                Setup();
+
+            try
+            {
+                if (!elevatorMoving)
+                    ReadAndCheck();
+            }
+            catch (System.Exception)
+            {
+                writeSucceeded = false;
+                Debug.Log("TwinCAT not running.");
+            }
+            
         }
 
         private void ReadAndCheck()
@@ -67,32 +87,40 @@ namespace Assets.Scripts.TwinCAT
         public void AnimationFinished()
         {
             elevatorMoving = false;
-            CheckAndWrite();
+            writeSucceeded = CheckAndWrite();
         }
 
-        private void CheckAndWrite()
+        private bool CheckAndWrite()
         {
             if (elevatorPosition == 0)
             {
                 elevatorTableIsDescended.state = true;
-                twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state);
+                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state))
+                    return false;
             }
             else
             {
                 elevatorTableIsDescended.state = false;
-                twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state);
+                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state))
+                    return false;
             }
 
             if (elevatorPosition == 1)
             {
                 elevatorTableIsLifted.state = true;
-                twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state);
+                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+                    return false;
             }
             else
             {
                 elevatorTableIsLifted.state = false;
-                twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state);
+                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+                    return false;
             }
+
+            return true;
         }
+
+
     }
 }
