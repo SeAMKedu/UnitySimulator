@@ -279,22 +279,22 @@ Prefab:
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 387.30002
+      value: 298.00613
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -302.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 674.60004
+      value: 496.01227
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 93.100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
@@ -448,22 +448,22 @@ Prefab:
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 387.30002
+      value: 298.00613
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -465.83334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 754.60004
+      value: 576.01227
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 53.133343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
@@ -577,6 +577,25 @@ GameObject:
   m_PrefabParentObject: {fileID: 1841568285304186, guid: bc66ad08ca16021478bd92dd3669d57e,
     type: 2}
   m_PrefabInternal: {fileID: 228568061}
+--- !u!114 &228568064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 228568063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: 40
+  m_PreferredWidth: -1
+  m_PreferredHeight: 60
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 2
 --- !u!1 &255106499 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1841568285304186, guid: bc66ad08ca16021478bd92dd3669d57e,
@@ -653,22 +672,22 @@ Prefab:
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 387.30002
+      value: 298.00613
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -405.85004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 674.60004
+      value: 496.01227
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 93.100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
@@ -814,7 +833,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543238198}
   m_LocalRotation: {x: -0.04000127, y: 0.9188185, z: -0.38058704, w: -0.09657162}
-  m_LocalPosition: {x: 6.074599, y: 16.76117, z: 15.43655}
+  m_LocalPosition: {x: 6.074599, y: 20.98, z: 19.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1125,22 +1144,22 @@ Prefab:
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 387.30002
+      value: 298.00613
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -96.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 674.60004
+      value: 496.01227
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 93.100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
@@ -1290,12 +1309,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1469,22 +1488,22 @@ Prefab:
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 387.30002
+      value: 298.00613
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -199.65001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 674.60004
+      value: 496.01227
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 93.100006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224841625428638712, guid: bc66ad08ca16021478bd92dd3669d57e,
         type: 2}
@@ -1593,6 +1612,7 @@ GameObject:
   - component: {fileID: 1685743519}
   - component: {fileID: 1685743521}
   - component: {fileID: 1685743520}
+  - component: {fileID: 1685743522}
   m_Layer: 5
   m_Name: Infodump
   m_TagString: Untagged
@@ -1639,12 +1659,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1666,6 +1686,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1685743518}
+--- !u!114 &1685743522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685743518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: 250
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
 --- !u!1 &1993805262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,8 +1715,8 @@ GameObject:
   - component: {fileID: 1993805263}
   - component: {fileID: 1993805266}
   - component: {fileID: 1993805265}
-  - component: {fileID: 1993805264}
   - component: {fileID: 1993805267}
+  - component: {fileID: 1993805264}
   m_Layer: 5
   m_Name: HelpPanel
   m_TagString: HelpMenu
@@ -1725,7 +1764,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
 --- !u!114 &1993805265

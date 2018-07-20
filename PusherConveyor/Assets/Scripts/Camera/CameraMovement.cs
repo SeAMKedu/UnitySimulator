@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour 
 {
@@ -35,8 +34,9 @@ public class CameraMovement : MonoBehaviour
             cameraLocked = !cameraLocked;
             lastMousePosition = Input.mousePosition;
         }
-            
 
+        if (Input.GetButtonDown("Restart"))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
     }
 
     #region Drag Camera Method
