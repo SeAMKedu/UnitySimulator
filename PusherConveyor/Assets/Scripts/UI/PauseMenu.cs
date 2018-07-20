@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseMenu : MonoBehaviour 
 {
@@ -24,23 +22,25 @@ public class PauseMenu : MonoBehaviour
         {
             if (!helpPanel.activeInHierarchy)
             {
-                if (menuPanel.activeInHierarchy)
-                    ContinueSimulation();
-
-                else if (!menuPanel.activeInHierarchy)
-                    PauseSimulation();
+                SetMenuPanelState();
             }
             else if (helpPanel.activeInHierarchy)
             {
                 helpPanel.SetActive(false);
                 menuPanel.SetActive(true);
             }
-
-            
-           
-
         }
+
 	}
+
+    private void SetMenuPanelState()
+    {
+        if (menuPanel.activeInHierarchy)
+            ContinueSimulation();
+
+        else if (!menuPanel.activeInHierarchy)
+            PauseSimulation();
+    }
 
     private void PauseSimulation()
     {

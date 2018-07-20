@@ -40,7 +40,6 @@ namespace Assets.Scripts.TwinCAT
             animator = GetComponent<Animator>();
             twincatADS.WriteToTwincat(pusherRetracted.name, pusherRetracted.state);
             twincatADS.WriteToTwincat(pusherPushed.name, pusherPushed.state);
-            //location = transform.Find("Spatula/MyActualLocation").gameObject;
         }
 
 

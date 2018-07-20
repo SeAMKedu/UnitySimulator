@@ -49,28 +49,5 @@ namespace Assets.Scripts.TwinCAT
             boxIsShaking = false;
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.name + " triggered me!");
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            if (collision.gameObject.tag == "Product")
-            {
-                if (boxIsShaking)
-                {
-                    if(collision.rigidbody.velocity == new Vector3(0, 0, 0))
-                    {
-                        Debug.Log("Shake thyself");
-                        Product product = collision.gameObject.GetComponent<Product>();
-                        product.ShakeMe();
-                    }
-                    
-                }
-            }
-        }
-
-
     }
 }

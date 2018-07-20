@@ -17,6 +17,7 @@ TagManager:
   - Box
   - Menu
   - HelpMenu
+  - EventSystem
   layers:
   - Default
   - TransparentFX

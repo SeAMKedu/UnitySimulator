@@ -23,11 +23,6 @@ public class CameraMovement : MonoBehaviour
     float camSens = 0.25f; //How sensitive it with mouse
     private float totalRun = 1.0f;
     #endregion
-
-    void Start () 
-	{
-		
-	}
 	
 	void Update ()
     {

@@ -50,11 +50,8 @@ namespace Assets.Scripts.TwinCAT
         private void InfraredRay()
         {
             var direction = transform.TransformDirection(Vector3.forward);
-            //note the use of var as the type. This is because in c# you 
-            // can have lamda functions which open up the use of untyped variables
-            //these variables can only live INSIDE a function. 
+
             RaycastHit hit;
-            //Debug.DrawRay(shootingpoint.transform.position, direction * 5, Color.red);
 
             if (Physics.Raycast(shootingpoint.transform.position, direction, out hit, 5))
             {
@@ -103,7 +100,6 @@ namespace Assets.Scripts.TwinCAT
             return myLine;
         }
 
-
         private void CheckAndWrite()
         {
             if (objectIsOnSensor && sensorState == 0)
@@ -119,7 +115,6 @@ namespace Assets.Scripts.TwinCAT
                 twincatADS.WriteToTwincat(sensor.name, sensor.state);
             }
         }
-
 
     }
 }
