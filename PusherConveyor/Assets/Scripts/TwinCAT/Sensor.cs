@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Assets.Scripts.Models;
 
 namespace Assets.Scripts.TwinCAT
@@ -34,8 +29,8 @@ namespace Assets.Scripts.TwinCAT
             twincatADS = GetComponentInParent<TwinCAT_ADS>();
             
             // Infrared 
-            shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
-            infraredRayDefaultEnd = new Vector3(shootingpoint.transform.position.x, shootingpoint.transform.position.y, 0.4f);
+            shootingpoint = transform.Find("PassiveInfraredSensor/ShootingPoint").gameObject;
+            infraredRayDefaultEnd = new Vector3(shootingpoint.transform.position.x, shootingpoint.transform.position.y, 2.0f);
             infraredRayCurrentEnd = infraredRayDefaultEnd;
             infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
 

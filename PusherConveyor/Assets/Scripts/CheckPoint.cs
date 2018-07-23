@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Assets.Scripts.TwinCAT;
+﻿using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
