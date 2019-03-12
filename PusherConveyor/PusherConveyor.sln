@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherConveyor", "PusherConveyor.csproj", "{80B4031C-3B34-36C6-8A92-DEDE1AACC8C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PusherConveyor.Editor", "PusherConveyor.Editor.csproj", "{8FFE062B-B222-E36B-C06A-BBAF9982E8A2}"

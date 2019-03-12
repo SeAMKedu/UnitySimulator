@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Models;
 
 namespace Assets.Scripts.TwinCAT
 {
@@ -9,8 +8,8 @@ namespace Assets.Scripts.TwinCAT
         public string boxShakerName = "BoxShaker";
         public string programOrganizationUnit = "MAIN";
 
-        private TwinCATVariable boxShaker;
-        private TwinCAT_ADS twincatADS;
+        private TwincatVariable boxShaker;
+        private TwincatAdsController twincatADS;
         Animator animator;
 
         [HideInInspector]
@@ -18,12 +17,12 @@ namespace Assets.Scripts.TwinCAT
 
         void Awake()
         {
-            boxShaker = new TwinCATVariable(boxShakerName, programOrganizationUnit);
+            boxShaker = new TwincatVariable(boxShakerName, programOrganizationUnit);
         }
 
         void Start()
         {
-            twincatADS = GetComponentInParent<TwinCAT_ADS>();
+            twincatADS = GetComponentInParent<TwincatAdsController>();
             animator = GetComponent<Animator>();
         }
 
@@ -36,7 +35,7 @@ namespace Assets.Scripts.TwinCAT
 
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(boxShaker.name))
+            if (twincatADS.ReadFromTwincat(boxShaker.Name))
             {
                 boxIsShaking = true;
                 animator.SetTrigger("Shake");

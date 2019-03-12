@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Assets.Scripts.Models;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.TwinCAT
 {
@@ -18,31 +12,40 @@ namespace Assets.Scripts.TwinCAT
         private Vector3 infraredRayDefaultEnd;
         private Vector3 infraredRayCurrentEnd;
 
-        private TwinCATVariable sensor;
-        private TwinCAT_ADS twincatADS;
+        private TwincatVariable sensor;
+        private TwincatAdsController twincatADS;
 
         private bool objectIsOnSensor = false;
         private int sensorState = 0;
 
-        void Awake()
+        private void Awake()
         {
-            sensor = new TwinCATVariable(sensorName, programOrganizationUnit);
+            sensor = new TwincatVariable(sensorName, programOrganizationUnit);
         }
 
-        void Start()
+        private void Start()
         {
-            twincatADS = GetComponentInParent<TwinCAT_ADS>();
+            twincatADS = GetComponentInParent<TwincatAdsController>();
             
             // Infrared 
-            shootingpoint = transform.Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
-            infraredRayDefaultEnd = new Vector3(shootingpoint.transform.position.x, shootingpoint.transform.position.y, 0.4f);
-            infraredRayCurrentEnd = infraredRayDefaultEnd;
-            infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
+            shootingpoint = transform.
+                Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
 
-            twincatADS.WriteToTwincat(sensor.name, sensor.state);
+            infraredRayDefaultEnd = new Vector3(
+                shootingpoint.transform.position.x,
+                shootingpoint.transform.position.y,
+                0.4f);
+
+            infraredRayCurrentEnd = infraredRayDefaultEnd;
+            infraredRay = DrawLine(
+                shootingpoint.transform.position, 
+                infraredRayDefaultEnd, 
+                Color.red);
+
+            twincatADS.WriteToTwincat(sensor.Name, sensor.Data);
         }
 
-        void Update()
+        private void Update()
         {
             InfraredRay();
         }
@@ -58,9 +61,12 @@ namespace Assets.Scripts.TwinCAT
                 infraredRayCurrentEnd = infraredRayDefaultEnd;
                 infraredRayCurrentEnd.z = hit.transform.position.z;
                 Destroy(infraredRay);
-                infraredRay = DrawLine(shootingpoint.transform.position, infraredRayCurrentEnd, Color.red);
+                infraredRay = DrawLine(
+                    shootingpoint.transform.position,
+                    infraredRayCurrentEnd,
+                    Color.red);
 
-                Debug.Log("HIT");
+                Debug.Log("There is an object on " + sensor.Name);
 
                 if (hit.collider.gameObject.tag == "Product")
                 {
@@ -70,7 +76,8 @@ namespace Assets.Scripts.TwinCAT
             }
             else
             {
-                // Check whethever the default infrared has been created or not. No use destroying and creating it each frame.
+                // Check whethever the default infrared has been created or not. 
+                // No use destroying and creating it each frame.
                 if (infraredRayCurrentEnd != infraredRayDefaultEnd)
                 {
                     Destroy(infraredRay);
@@ -82,21 +89,31 @@ namespace Assets.Scripts.TwinCAT
 
         }
 
-        GameObject DrawLine(Vector3 start, Vector3 end, Color color, float duration = 0.2f)
+        private GameObject DrawLine(Vector3 start, Vector3 end, Color color)
         {
-            GameObject myLine = new GameObject();
-            myLine.name = sensor.name + " infrared light";
+            // New GameObject for the line
+            GameObject myLine = new GameObject
+            {
+                name = sensor.Name + " infrared light"
+            };
+
             myLine.transform.position = start;
             myLine.AddComponent<LineRenderer>();
-            LineRenderer lr = myLine.GetComponent<LineRenderer>();
-            lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-            lr.startColor = color;
-            lr.endColor = color;
-            lr.startWidth = 0.1f;
-            lr.endWidth = 0.1f;
-            lr.SetPosition(0, start);
-            lr.SetPosition(1, end);
-            //GameObject.Destroy(myLine, duration);
+            LineRenderer lineRenderer = myLine.GetComponent<LineRenderer>();
+            lineRenderer.material = new Material(
+                Shader.Find("Particles/Alpha Blended Premultiply"));
+
+            // Set color
+            lineRenderer.startColor = color;
+            lineRenderer.endColor = color;
+
+            // Set width
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.1f;
+
+            // Set position
+            lineRenderer.SetPosition(0, start);
+            lineRenderer.SetPosition(1, end);
             return myLine;
         }
 
@@ -104,15 +121,15 @@ namespace Assets.Scripts.TwinCAT
         {
             if (objectIsOnSensor && sensorState == 0)
             {
-                sensor.state = true;
+                sensor.Data = true;
                 sensorState = 1;
-                twincatADS.WriteToTwincat(sensor.name, sensor.state);
+                twincatADS.WriteToTwincat(sensor.Name, sensor.Data);
             }
             if (!objectIsOnSensor && sensorState == 1)
             {
                 sensorState = 0;
-                sensor.state = false;
-                twincatADS.WriteToTwincat(sensor.name, sensor.state);
+                sensor.Data = false;
+                twincatADS.WriteToTwincat(sensor.Name, sensor.Data);
             }
         }
 

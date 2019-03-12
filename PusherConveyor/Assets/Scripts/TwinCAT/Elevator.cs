@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Models;
 
 namespace Assets.Scripts.TwinCAT
 {
@@ -13,36 +12,36 @@ namespace Assets.Scripts.TwinCAT
         private bool elevatorMoving = false;
         private bool writeSucceeded = true;
 
-        private TwinCATVariable elevatorTableUp;
-        private TwinCATVariable elevatorTableDown;
+        private TwincatVariable elevatorTableUp;
+        private TwincatVariable elevatorTableDown;
 
-        private TwinCATVariable elevatorTableIsLifted;
-        private TwinCATVariable elevatorTableIsDescended;
+        private TwincatVariable elevatorTableIsLifted;
+        private TwincatVariable elevatorTableIsDescended;
 
-        private TwinCAT_ADS twincatADS;
+        private TwincatAdsController twincatADS;
         Animator animator;
 
         void Awake()
         {
-            elevatorTableUp = new TwinCATVariable(elevatorName + "TableUp", programOrganizationUnit);
-            elevatorTableDown = new TwinCATVariable(elevatorName + "TableDown", programOrganizationUnit);
-            elevatorTableIsLifted = new TwinCATVariable(elevatorName + "TableIsLifted", programOrganizationUnit);
-            elevatorTableIsDescended = new TwinCATVariable(elevatorName + "TableIsDescended", programOrganizationUnit);
+            elevatorTableUp = new TwincatVariable(elevatorName + "TableUp", programOrganizationUnit);
+            elevatorTableDown = new TwincatVariable(elevatorName + "TableDown", programOrganizationUnit);
+            elevatorTableIsLifted = new TwincatVariable(elevatorName + "TableIsLifted", programOrganizationUnit);
+            elevatorTableIsDescended = new TwincatVariable(elevatorName + "TableIsDescended", programOrganizationUnit);
         }
 
         void Start()
         {
-            twincatADS = GetComponentInParent<TwinCAT_ADS>();
+            twincatADS = GetComponentInParent<TwincatAdsController>();
             animator = GetComponent<Animator>();
             Setup();
         }
 
         private void Setup()
         {
-            elevatorTableIsDescended.state = true;
-            elevatorTableIsLifted.state = false;
-            if (twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state)
-             && twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+            elevatorTableIsDescended.Data = true;
+            elevatorTableIsLifted.Data = false;
+            if (twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data)
+             && twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
                 writeSucceeded = true;
 
             else
@@ -69,14 +68,14 @@ namespace Assets.Scripts.TwinCAT
 
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(elevatorTableUp.name) && elevatorPosition == 0)
+            if (twincatADS.ReadFromTwincat(elevatorTableUp.Name) && elevatorPosition == 0)
             {
                 elevatorMoving = true;
                 elevatorPosition = 1;
                 animator.SetTrigger("Up");
             }
 
-            if (twincatADS.ReadFromTwincat(elevatorTableDown.name) && elevatorPosition == 1)
+            if (twincatADS.ReadFromTwincat(elevatorTableDown.Name) && elevatorPosition == 1)
             {
                 elevatorMoving = true;
                 elevatorPosition = 0;
@@ -94,27 +93,27 @@ namespace Assets.Scripts.TwinCAT
         {
             if (elevatorPosition == 0)
             {
-                elevatorTableIsDescended.state = true;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state))
+                elevatorTableIsDescended.Data = true;
+                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data))
                     return false;
             }
             else
             {
-                elevatorTableIsDescended.state = false;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.name, elevatorTableIsDescended.state))
+                elevatorTableIsDescended.Data = false;
+                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data))
                     return false;
             }
 
             if (elevatorPosition == 1)
             {
-                elevatorTableIsLifted.state = true;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+                elevatorTableIsLifted.Data = true;
+                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
                     return false;
             }
             else
             {
-                elevatorTableIsLifted.state = false;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.name, elevatorTableIsLifted.state))
+                elevatorTableIsLifted.Data = false;
+                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
                     return false;
             }
 

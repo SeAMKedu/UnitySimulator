@@ -125,7 +125,7 @@ public class Product : MonoBehaviour {
     {
         if (currentConveyor != null)
         {
-            if ((bool)currentConveyor.conveyorOn.state && Time.timeScale != 0)
+            if ((bool)currentConveyor.conveyorOn.Data && Time.timeScale != 0)
             {
                 IamMoving = true;
                 thisRigidBody.transform.Translate(Vector3.left * 0.1f);

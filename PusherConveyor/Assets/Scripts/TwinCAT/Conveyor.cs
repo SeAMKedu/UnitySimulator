@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Models;
 
 namespace Assets.Scripts.TwinCAT
 {
@@ -10,17 +9,17 @@ namespace Assets.Scripts.TwinCAT
         public string programOrganizationUnit = "MAIN";
 
         [HideInInspector]
-        public TwinCATVariable conveyorOn;
-        private TwinCAT_ADS twincatADS;
+        public TwincatVariable conveyorOn;
+        private TwincatAdsController twincatADS;
 
         void Awake()
         {
-            conveyorOn = new TwinCATVariable(conveyorName, programOrganizationUnit);
+            conveyorOn = new TwincatVariable(conveyorName, programOrganizationUnit);
         }
         
         void Start()
         {
-            twincatADS = GetComponentInParent<TwinCAT_ADS>();
+            twincatADS = GetComponentInParent<TwincatAdsController>();
         }
 
 
@@ -31,15 +30,15 @@ namespace Assets.Scripts.TwinCAT
 
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(conveyorOn.name) && (bool)conveyorOn.state == false)
+            if (twincatADS.ReadFromTwincat(conveyorOn.Name) && (bool)conveyorOn.Data == false)
             {
                 Debug.Log(conveyorName + " is on");
-                conveyorOn.state = true;
+                conveyorOn.Data = true;
             }
-            if (twincatADS.ReadFromTwincat(conveyorOn.name) == false && (bool)conveyorOn.state)
+            if (twincatADS.ReadFromTwincat(conveyorOn.Name) == false && (bool)conveyorOn.Data)
             {
                 Debug.Log(conveyorName + " is off");
-                conveyorOn.state = false;
+                conveyorOn.Data = false;
             }
         }
 
