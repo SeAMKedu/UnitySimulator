@@ -19,44 +19,65 @@
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>MAIN.ElevatorSensor</Name>
+							<Name>MAIN.iElevatorSensor</Name>
 							<Comment>
 								<![CDATA[ Sensor attached to elevator]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.ElevatorTableIsLifted</Name>
+							<Name>MAIN.iElevatorIsLifted</Name>
 							<Comment>
 								<![CDATA[ Elevator is currently lifted]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.ElevatorTableIsDescended</Name>
+							<Name>MAIN.iElevatorIsDescended</Name>
 							<Comment>
 								<![CDATA[ Elevator is currently descended]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.Conveyor2Sensor</Name>
+							<Name>MAIN.iElevatorConveyorRunning</Name>
+							<Comment>
+								<![CDATA[ Elevator's conveyor is running]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iConveyor2Sensor</Name>
 							<Comment>
 								<![CDATA[ Sensor attached to second conveyor]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.PusherPushed</Name>
+							<Name>MAIN.iPusherPushed</Name>
 							<Comment>
 								<![CDATA[ Pusher is pushed]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.PusherRetracted</Name>
+							<Name>MAIN.iPusherRetracted</Name>
 							<Comment>
 								<![CDATA[ Pusher is retracted]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iConveyor2Running</Name>
+							<Comment>
+								<![CDATA[ Conveyor 2 is running]]>
+							</Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.iConveyor1Running</Name>
+							<Comment>
+								<![CDATA[ Conveyor 1 is running]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
@@ -64,56 +85,56 @@
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>MAIN.Conveyor1</Name>
+							<Name>MAIN.qConveyor1</Name>
 							<Comment>
 								<![CDATA[ First conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.ElevatorConveyor</Name>
+							<Name>MAIN.qElevatorConveyor</Name>
 							<Comment>
 								<![CDATA[ Elevator's conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.ElevatorTableUp</Name>
+							<Name>MAIN.qElevatorUp</Name>
 							<Comment>
 								<![CDATA[ Move elevator's table up]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.ElevatorTableDown</Name>
+							<Name>MAIN.qElevatorDown</Name>
 							<Comment>
 								<![CDATA[ Move elevator's table down]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.Conveyor2</Name>
+							<Name>MAIN.qConveyor2</Name>
 							<Comment>
 								<![CDATA[ Second conveyor on/off]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.PusherPush</Name>
+							<Name>MAIN.qPusherPush</Name>
 							<Comment>
 								<![CDATA[ Push with pusher]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.PusherRetract</Name>
+							<Name>MAIN.qPusherRetract</Name>
 							<Comment>
 								<![CDATA[ Retract pusher]]>
 							</Comment>
 							<Type>BIT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.BoxShaker</Name>
+							<Name>MAIN.qBoxShaker</Name>
 							<Comment>
 								<![CDATA[ Shake the box]]>
 							</Comment>
