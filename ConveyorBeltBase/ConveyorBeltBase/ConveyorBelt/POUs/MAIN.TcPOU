@@ -7,32 +7,37 @@ END_VAR
 
 VAR_INPUT
 	// Elevator inputs
-	ElevatorSensor AT %IX1.0: BOOL; // Sensor attached to elevator
-	ElevatorTableIsLifted AT %IX1.1: BOOL; // Elevator is currently lifted
-	ElevatorTableIsDescended AT %IX1.2: BOOL; // Elevator is currently descended
+	iElevatorSensor AT %IX1.0: BOOL; // Sensor attached to elevator
+	iElevatorIsLifted AT %IX1.1: BOOL; // Elevator is currently lifted
+	iElevatorIsDescended AT %IX1.2: BOOL; // Elevator is currently descended
+	iElevatorConveyorRunning AT %IX1.3: BOOL; // Elevator's conveyor is running
 	
 	// Conveyor 2 inputs
-	Conveyor2Sensor AT %IX2.0: BOOL; // Sensor attached to second conveyor
-	PusherPushed AT %IX2.1: BOOL; // Pusher is pushed
-	PusherRetracted AT %IX2.2: BOOL; // Pusher is retracted
+	iConveyor2Sensor AT %IX2.0: BOOL; // Sensor attached to second conveyor
+	iPusherPushed AT %IX2.1: BOOL; // Pusher is pushed
+	iPusherRetracted AT %IX2.2: BOOL; // Pusher is retracted
+	iConveyor2Running AT %IX2.3: BOOL; // Conveyor 2 is running
+	
+	// Conveyor 1 inputs
+	iConveyor1Running AT %IX3.0: BOOL; // Conveyor 1 is running
 END_VAR
 
 VAR_OUTPUT
 	// Conveyor 1 outputs
-	Conveyor1 AT %QX0.0: BOOL; // First conveyor on/off
+	qConveyor1 AT %QX0.0: BOOL; // First conveyor on/off
 	
 	// Elevator outputs
-	ElevatorConveyor AT %QX1.0: BOOL; // Elevator's conveyor on/off
-	ElevatorTableUp AT %QX1.1: BOOL; // Move elevator's table up
-	ElevatorTableDown AT %QX1.2: BOOL; // Move elevator's table down
+	qElevatorConveyor AT %QX1.0: BOOL; // Elevator's conveyor on/off
+	qElevatorUp AT %QX1.1: BOOL; // Move elevator's table up
+	qElevatorDown AT %QX1.2: BOOL; // Move elevator's table down
 	
 	// Conveyor 2 outputs
-	Conveyor2 AT %QX2.0: BOOL; // Second conveyor on/off
-	PusherPush AT %QX2.1: BOOL; // Push with pusher
-	PusherRetract AT %QX2.2: BOOL; // Retract pusher
+	qConveyor2 AT %QX2.0: BOOL; // Second conveyor on/off
+	qPusherPush AT %QX2.1: BOOL; // Push with pusher
+	qPusherRetract AT %QX2.2: BOOL; // Retract pusher
 	
 	// Box outputs
-	BoxShaker AT %QX3.0: BOOL; // Shake the box
+	qBoxShaker AT %QX3.0: BOOL; // Shake the box
 END_VAR]]></Declaration>
     <Implementation>
       <NWL>

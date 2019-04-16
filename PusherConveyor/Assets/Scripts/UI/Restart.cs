@@ -5,6 +5,7 @@ public class Restart : MonoBehaviour
 {
     public void RestartSimulation()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+        // loads current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 }

@@ -4,11 +4,11 @@ namespace Assets.Scripts.TwinCAT
 {
     public class Pusher : MonoBehaviour
     {
+        [SerializeField]
+        private string pusherName = "Pusher";
+        [SerializeField]
+        private string programOrganizationUnit = "MAIN";
 
-        public string pusherName = "Pusher";
-        public string programOrganizationUnit = "MAIN";
-
-        private int pusherPosition = 0;
         private bool pusherMoving = false;
         private bool writeSucceeded = true;
 
@@ -23,25 +23,41 @@ namespace Assets.Scripts.TwinCAT
         
         void Awake()
         {
-            pusherPush = new TwincatVariable(pusherName + "Push", programOrganizationUnit);
-            pusherRetract = new TwincatVariable(pusherName + "Retract", programOrganizationUnit);
-            pusherPushed = new TwincatVariable(pusherName + "Pushed", programOrganizationUnit);
-            pusherRetracted = new TwincatVariable(pusherName + "Retracted", programOrganizationUnit);
+            pusherPush = new TwincatVariable(
+                pusherName + "Push",
+                programOrganizationUnit,
+                TwincatVariableType.Output);
+
+            pusherRetract = new TwincatVariable(
+                pusherName + "Retract",
+                programOrganizationUnit,
+                TwincatVariableType.Output);
+
+            pusherPushed = new TwincatVariable(
+                pusherName + "Pushed",
+                programOrganizationUnit,
+                TwincatVariableType.Input);
+
+            pusherRetracted = new TwincatVariable(
+                pusherName + "Retracted",
+                programOrganizationUnit,
+                TwincatVariableType.Input);
+
+            // Set current state.
+            pusherRetracted.Data = true;
         }
 
         void Start()
         {
             twincatADS = GetComponentInParent<TwincatAdsController>();
             animator = GetComponent<Animator>();
-            Setup();
+            WriteToTwincat();
         }
 
-        private void Setup()
+        private void WriteToTwincat()
         {
-            pusherPushed.Data = false;
-            pusherRetracted.Data = true;
-            if (twincatADS.WriteToTwincat(pusherRetracted.Name, pusherRetracted.Data)
-                && twincatADS.WriteToTwincat(pusherPushed.Name, pusherPushed.Data))
+            if (twincatADS.WriteToTwincat(pusherRetracted)
+                && twincatADS.WriteToTwincat(pusherPushed))
                 writeSucceeded = true;
 
             else
@@ -51,11 +67,11 @@ namespace Assets.Scripts.TwinCAT
 
         void Update()
         {
-            if (!writeSucceeded)
-                Setup();
-
             try
             {
+                if (!writeSucceeded)
+                    WriteToTwincat();
+
                 if (!pusherMoving)
                     ReadAndCheck();
             }
@@ -69,17 +85,19 @@ namespace Assets.Scripts.TwinCAT
         
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(pusherPush.Name) && pusherPosition == 0)
+            if (twincatADS.ReadFromTwincat(pusherPush.Name) && pusherRetracted.DataAsBool())
             {
                 pusherMoving = true;
-                pusherPosition = 1;
+                pusherRetracted.Data = false;
+                pusherPushed.Data = true;
                 animator.SetTrigger("Pushing");
             }
 
-            if (twincatADS.ReadFromTwincat(pusherRetract.Name) && pusherPosition == 1)
+            if (twincatADS.ReadFromTwincat(pusherRetract.Name) && pusherPushed.DataAsBool())
             {
                 pusherMoving = true;
-                pusherPosition = 0;
+                pusherRetracted.Data = true;
+                pusherPushed.Data = false;
                 animator.SetTrigger("Retracting");
             }
         }
@@ -87,38 +105,7 @@ namespace Assets.Scripts.TwinCAT
         public void AnimationFinished()
         {
             pusherMoving = false;
-            writeSucceeded = CheckAndWrite();
-        }
-
-        private bool CheckAndWrite()
-        {
-            if (pusherPosition == 0)
-            {
-                pusherRetracted.Data = true;
-                if (!twincatADS.WriteToTwincat(pusherRetracted.Name, pusherRetracted.Data))
-                    return false;
-            }
-            else
-            {
-                pusherRetracted.Data = false;
-                if (!twincatADS.WriteToTwincat(pusherRetracted.Name, pusherRetracted.Data))
-                    return false;
-            }
-
-            if (pusherPosition == 1)
-            {
-                pusherPushed.Data = true;
-                if (!twincatADS.WriteToTwincat(pusherPushed.Name, pusherPushed.Data))
-                    return false;
-            }
-            else
-            {
-                pusherPushed.Data = false;
-                if (!twincatADS.WriteToTwincat(pusherPushed.Name, pusherPushed.Data))
-                    return false;
-            }
-
-            return true;
+            WriteToTwincat();
         }
 
     }

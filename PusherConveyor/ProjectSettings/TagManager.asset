@@ -18,6 +18,8 @@ TagManager:
   - Menu
   - HelpMenu
   - EventSystem
+  - AboutPanel
+  - AboutMenu
   layers:
   - Default
   - TransparentFX

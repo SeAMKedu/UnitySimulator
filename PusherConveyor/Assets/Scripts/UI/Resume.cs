@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Resume : MonoBehaviour 
 {
-
-
     public void ContinueSimulation()
     {
         Time.timeScale = 1;

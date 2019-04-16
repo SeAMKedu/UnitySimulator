@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
     //[SerializeField]
     private GameObject menuPanel;
     private GameObject helpPanel;
+    private GameObject aboutPanel;
 
     void Start () 
 	{
@@ -14,41 +15,59 @@ public class PauseMenu : MonoBehaviour
 
         helpPanel = GameObject.FindGameObjectWithTag("HelpMenu");
         helpPanel.SetActive(false);
+
+        aboutPanel = GameObject.FindGameObjectWithTag("AboutMenu");
+        aboutPanel.SetActive(false);
     }
 	
 	void Update () 
 	{
         if (Input.GetButtonDown("Menu"))
         {
-            if (!helpPanel.activeInHierarchy)
-            {
-                SetMenuPanelState();
-            }
-            else if (helpPanel.activeInHierarchy)
+            // Exit from Help panel
+            if (helpPanel.activeInHierarchy)
             {
                 helpPanel.SetActive(false);
                 menuPanel.SetActive(true);
             }
+            // Exit from About panel
+            else if (aboutPanel.activeInHierarchy)
+            {
+                aboutPanel.SetActive(false);
+                menuPanel.SetActive(true);
+            }
+            // Menu-button was pressed without other panels being active. 
+            else
+            {
+                SetMenuPanelState();
+            }
         }
-
 	}
 
     private void SetMenuPanelState()
     {
+        // Esc was pressed while menu was active => exit menu.
         if (menuPanel.activeInHierarchy)
             ContinueSimulation();
 
+        // Esc was pressed while menu was not active => activate menu.
         else if (!menuPanel.activeInHierarchy)
             PauseSimulation();
     }
 
-    private void PauseSimulation()
+    /// <summary>
+    /// Pause simulation and set menu as active.
+    /// </summary>
+    public void PauseSimulation()
     {
         Time.timeScale = 0;
         menuPanel.SetActive(true);
     }
 
-    private void ContinueSimulation()
+    /// <summary>
+    /// Continue simulation and deactivate menu.
+    /// </summary>
+    public void ContinueSimulation()
     {
         Time.timeScale = 1;
         menuPanel.SetActive(false);

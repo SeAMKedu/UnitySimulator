@@ -8,7 +8,8 @@ namespace Assets.Scripts.TwinCAT
     /// </summary>
     public class TwincatAdsController : MonoBehaviour
     {
-        public int twincatAdsPort = 851;
+        [SerializeField]
+        private int twincatAdsPort = 851;
         private TcAdsClient twincatAdsClient;
 
         void Awake()
@@ -53,17 +54,17 @@ namespace Assets.Scripts.TwinCAT
         }
 
         /// <summary>
-        /// Read a Boolean type variable in the ADS.
+        /// Read a bool type variable in the ADS.
         /// </summary>
         /// <param name="name">Name of the variable.</param>
-        /// <returns>Variable's Boolean value.</returns>
+        /// <returns>Variable's current bool value.</returns>
         public bool ReadFromTwincat(string name)
         {
             var data = twincatAdsClient.ReadAny(
                 twincatAdsClient.CreateVariableHandle(name),
                 typeof(bool));
 
-            return bool.Parse(data.ToString());
+            return (bool)data;
         }
 
     }

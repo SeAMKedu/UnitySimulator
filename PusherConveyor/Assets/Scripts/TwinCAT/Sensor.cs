@@ -4,10 +4,12 @@ namespace Assets.Scripts.TwinCAT
 {
     public class Sensor : MonoBehaviour
     {
-        public string sensorName = "Sensor";
-        public string programOrganizationUnit = "MAIN";
+        [SerializeField]
+        private string sensorName = "Sensor";
+        [SerializeField]
+        private string programOrganizationUnit = "MAIN";
 
-        private GameObject shootingpoint;
+        public GameObject shootingpoint;
         private GameObject infraredRay;
         private Vector3 infraredRayDefaultEnd;
         private Vector3 infraredRayCurrentEnd;
@@ -16,20 +18,25 @@ namespace Assets.Scripts.TwinCAT
         private TwincatAdsController twincatADS;
 
         private bool objectIsOnSensor = false;
-        private int sensorState = 0;
 
         private void Awake()
         {
-            sensor = new TwincatVariable(sensorName, programOrganizationUnit);
+            sensor = new TwincatVariable(
+                sensorName,
+                programOrganizationUnit,
+                TwincatVariableType.Input);
         }
 
         private void Start()
         {
             twincatADS = GetComponentInParent<TwincatAdsController>();
-            
-            // Infrared 
-            shootingpoint = transform.
-                Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
+
+            // Infrared
+            if (shootingpoint == null)
+            {
+                shootingpoint = transform.
+                    Find("PassiveInfraredSensor/PointToShootRayFrom").gameObject;
+            }
 
             infraredRayDefaultEnd = new Vector3(
                 shootingpoint.transform.position.x,
@@ -50,6 +57,9 @@ namespace Assets.Scripts.TwinCAT
             InfraredRay();
         }
 
+        /// <summary>
+        /// Create and handle logic of the infrared ray.
+        /// </summary>
         private void InfraredRay()
         {
             var direction = transform.TransformDirection(Vector3.forward);
@@ -71,7 +81,7 @@ namespace Assets.Scripts.TwinCAT
                 if (hit.collider.gameObject.tag == "Product")
                 {
                     objectIsOnSensor = true;
-                    CheckAndWrite();
+                    CheckThenWrite();
                 }         
             }
             else
@@ -81,14 +91,24 @@ namespace Assets.Scripts.TwinCAT
                 if (infraredRayCurrentEnd != infraredRayDefaultEnd)
                 {
                     Destroy(infraredRay);
-                    infraredRay = DrawLine(shootingpoint.transform.position, infraredRayDefaultEnd, Color.red);
+                    infraredRay = DrawLine(
+                        shootingpoint.transform.position,
+                        infraredRayDefaultEnd,
+                        Color.red);
                 }
                 objectIsOnSensor = false;
-                CheckAndWrite();
+                CheckThenWrite();
             }
 
         }
 
+        /// <summary>
+        /// Draw a line.
+        /// </summary>
+        /// <param name="start">Start vector of line.</param>
+        /// <param name="end">End vector of line.</param>
+        /// <param name="color">Color of the line.</param>
+        /// <returns>GameObject of the drawn line.</returns>
         private GameObject DrawLine(Vector3 start, Vector3 end, Color color)
         {
             // New GameObject for the line
@@ -117,17 +137,21 @@ namespace Assets.Scripts.TwinCAT
             return myLine;
         }
 
-        private void CheckAndWrite()
+        /// <summary>
+        /// Check if a value should be changed in the ADS.
+        /// </summary>
+        private void CheckThenWrite()
         {
-            if (objectIsOnSensor && sensorState == 0)
+            // Object is on sensor and value in ADS is false.
+            if (objectIsOnSensor && !sensor.DataAsBool())
             {
                 sensor.Data = true;
-                sensorState = 1;
                 twincatADS.WriteToTwincat(sensor.Name, sensor.Data);
             }
-            if (!objectIsOnSensor && sensorState == 1)
+
+            // Object is not on sensor and value in ADS is true.
+            if (!objectIsOnSensor && sensor.DataAsBool())
             {
-                sensorState = 0;
                 sensor.Data = false;
                 twincatADS.WriteToTwincat(sensor.Name, sensor.Data);
             }

@@ -4,44 +4,64 @@ namespace Assets.Scripts.TwinCAT
 {
     public class Elevator : MonoBehaviour
     {
+        [SerializeField]
+        private string elevatorName = "Elevator";
+        [SerializeField]
+        private string programOrganizationUnit = "MAIN";
 
-        public string elevatorName = "Elevator";
-        public string programOrganizationUnit = "MAIN";
-
-        private int elevatorPosition = 0;
         private bool elevatorMoving = false;
         private bool writeSucceeded = true;
 
         private TwincatVariable elevatorTableUp;
         private TwincatVariable elevatorTableDown;
 
+        // Output
         private TwincatVariable elevatorTableIsLifted;
         private TwincatVariable elevatorTableIsDescended;
 
         private TwincatAdsController twincatADS;
-        Animator animator;
+        private Animator animator;
 
         void Awake()
         {
-            elevatorTableUp = new TwincatVariable(elevatorName + "TableUp", programOrganizationUnit);
-            elevatorTableDown = new TwincatVariable(elevatorName + "TableDown", programOrganizationUnit);
-            elevatorTableIsLifted = new TwincatVariable(elevatorName + "TableIsLifted", programOrganizationUnit);
-            elevatorTableIsDescended = new TwincatVariable(elevatorName + "TableIsDescended", programOrganizationUnit);
+            elevatorTableUp = new TwincatVariable(
+                elevatorName + "Up",
+                programOrganizationUnit,
+                TwincatVariableType.Output);
+
+            elevatorTableDown = new TwincatVariable(
+                elevatorName + "Down",
+                programOrganizationUnit,
+                TwincatVariableType.Output);
+
+            elevatorTableIsLifted = new TwincatVariable(
+                elevatorName + "IsLifted",
+                programOrganizationUnit,
+                TwincatVariableType.Input);
+
+            elevatorTableIsDescended = new TwincatVariable(
+                elevatorName + "IsDescended",
+                programOrganizationUnit,
+                TwincatVariableType.Input);
+
+            // Set current state.
+            elevatorTableIsDescended.Data = true;
         }
 
         void Start()
         {
             twincatADS = GetComponentInParent<TwincatAdsController>();
             animator = GetComponent<Animator>();
-            Setup();
+            WriteToTwincat();
         }
 
-        private void Setup()
+        /// <summary>
+        /// Write the current values to the TwinCAT ADS.
+        /// </summary>
+        private void WriteToTwincat()
         {
-            elevatorTableIsDescended.Data = true;
-            elevatorTableIsLifted.Data = false;
-            if (twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data)
-             && twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
+            if (twincatADS.WriteToTwincat(elevatorTableIsDescended)
+             && twincatADS.WriteToTwincat(elevatorTableIsLifted))
                 writeSucceeded = true;
 
             else
@@ -50,76 +70,52 @@ namespace Assets.Scripts.TwinCAT
 
         void Update()
         {
-            if (!writeSucceeded)
-                Setup();
-
             try
             {
+                if (!writeSucceeded)
+                    WriteToTwincat();
+
                 if (!elevatorMoving)
                     ReadAndCheck();
             }
             catch (System.Exception)
             {
                 writeSucceeded = false;
-                Debug.Log("TwinCAT not running.");
+                Debug.Log("TwinCAT is not running.");
             }
-            
         }
 
+        /// <summary>
+        /// Check if a value has changed in the ADS.
+        /// </summary>
         private void ReadAndCheck()
         {
-            if (twincatADS.ReadFromTwincat(elevatorTableUp.Name) && elevatorPosition == 0)
+            if (twincatADS.ReadFromTwincat(elevatorTableUp.Name) 
+                && elevatorTableIsDescended.DataAsBool())
             {
                 elevatorMoving = true;
-                elevatorPosition = 1;
+                elevatorTableIsDescended.Data = false;
+                elevatorTableIsLifted.Data = true;
                 animator.SetTrigger("Up");
             }
 
-            if (twincatADS.ReadFromTwincat(elevatorTableDown.Name) && elevatorPosition == 1)
+            if (twincatADS.ReadFromTwincat(elevatorTableDown.Name) 
+                && elevatorTableIsLifted.DataAsBool())
             {
                 elevatorMoving = true;
-                elevatorPosition = 0;
+                elevatorTableIsDescended.Data = true;
+                elevatorTableIsLifted.Data = false;
                 animator.SetTrigger("Down");
             }
         }
 
+        /// <summary>
+        /// Called in the animation when it finishes.
+        /// </summary>
         public void AnimationFinished()
         {
             elevatorMoving = false;
-            writeSucceeded = CheckAndWrite();
+            WriteToTwincat();
         }
-
-        private bool CheckAndWrite()
-        {
-            if (elevatorPosition == 0)
-            {
-                elevatorTableIsDescended.Data = true;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data))
-                    return false;
-            }
-            else
-            {
-                elevatorTableIsDescended.Data = false;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsDescended.Name, elevatorTableIsDescended.Data))
-                    return false;
-            }
-
-            if (elevatorPosition == 1)
-            {
-                elevatorTableIsLifted.Data = true;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
-                    return false;
-            }
-            else
-            {
-                elevatorTableIsLifted.Data = false;
-                if (!twincatADS.WriteToTwincat(elevatorTableIsLifted.Name, elevatorTableIsLifted.Data))
-                    return false;
-            }
-
-            return true;
-        }
-
-
     }
 }

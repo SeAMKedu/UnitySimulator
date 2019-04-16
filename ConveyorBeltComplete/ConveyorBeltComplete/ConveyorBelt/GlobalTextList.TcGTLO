@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
   <GlobalTextList Name="GlobalTextList" Id="{0347fa0a-d791-4dd9-bc5c-4d459474cb9a}">
     <XmlArchive>
       <Data>
@@ -16,8 +16,18 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"500"</v>
+              <v n="TextDefault">"Conveyor 1 running"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"240"</v>
               <v n="TextDefault">"Conveyor 2"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"571"</v>
+              <v n="TextDefault">"Conveyor 2 running"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -28,6 +38,21 @@
             <o>
               <v n="TextID">"474"</v>
               <v n="TextDefault">"Elevator Conveyor"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"237"</v>
+              <v n="TextDefault">"Elevator conveyor running"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"10"</v>
+              <v n="TextDefault">"Elevator is descended"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"674"</v>
+              <v n="TextDefault">"Elevator is lifted"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

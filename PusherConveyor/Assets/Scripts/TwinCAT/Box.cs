@@ -4,9 +4,10 @@ namespace Assets.Scripts.TwinCAT
 {
     public class Box : MonoBehaviour
     {
-
-        public string boxShakerName = "BoxShaker";
-        public string programOrganizationUnit = "MAIN";
+        [SerializeField]
+        private string boxShakerName = "BoxShaker";
+        [SerializeField]
+        private string programOrganizationUnit = "MAIN";
 
         private TwincatVariable boxShaker;
         private TwincatAdsController twincatADS;
@@ -17,7 +18,10 @@ namespace Assets.Scripts.TwinCAT
 
         void Awake()
         {
-            boxShaker = new TwincatVariable(boxShakerName, programOrganizationUnit);
+            boxShaker = new TwincatVariable(
+                boxShakerName,
+                programOrganizationUnit,
+                TwincatVariableType.Output);
         }
 
         void Start()
@@ -25,7 +29,6 @@ namespace Assets.Scripts.TwinCAT
             twincatADS = GetComponentInParent<TwincatAdsController>();
             animator = GetComponent<Animator>();
         }
-
 
         void Update()
         {

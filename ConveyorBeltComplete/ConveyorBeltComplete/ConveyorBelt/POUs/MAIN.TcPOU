@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.16">
   <POU Name="MAIN" Id="{f0f7c776-c102-4f88-b06c-8c4d41f0a00b}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -20,32 +20,37 @@ END_VAR
 
 VAR_INPUT
 	// Elevator inputs
-	ElevatorSensor AT %IX1.0: BOOL; // Sensor attached to elevator
-	ElevatorTableIsLifted AT %IX1.1: BOOL; // Elevator is currently lifted
-	ElevatorTableIsDescended AT %IX1.2: BOOL; // Elevator is currently descended
+	iElevatorSensor AT %IX1.0: BOOL; // Sensor attached to elevator
+	iElevatorIsLifted AT %IX1.1: BOOL; // Elevator is currently lifted
+	iElevatorIsDescended AT %IX1.2: BOOL; // Elevator is currently descended
+	iElevatorConveyorRunning AT %IX1.3: BOOL; // Elevator's conveyor is running
 	
 	// Conveyor 2 inputs
-	Conveyor2Sensor AT %IX2.0: BOOL; // Sensor attached to second conveyor
-	PusherPushed AT %IX2.1: BOOL; // Pusher is pushed
-	PusherRetracted AT %IX2.2: BOOL; // Pusher is retracted
+	iConveyor2Sensor AT %IX2.0: BOOL; // Sensor attached to second conveyor
+	iPusherPushed AT %IX2.1: BOOL; // Pusher is pushed
+	iPusherRetracted AT %IX2.2: BOOL; // Pusher is retracted
+	iConveyor2Running AT %IX2.3: BOOL; // Conveyor 2 is running
+	
+	// Conveyor 1 inputs
+	iConveyor1Running AT %IX3.0: BOOL; // Conveyor 1 is running
 END_VAR
 
 VAR_OUTPUT
 	// Conveyor 1 outputs
-	Conveyor1 AT %QX0.0: BOOL; // First conveyor on/off
+	qConveyor1 AT %QX0.0: BOOL; // First conveyor on/off
 	
 	// Elevator outputs
-	ElevatorConveyor AT %QX1.0: BOOL; // Elevator's conveyor on/off
-	ElevatorTableUp AT %QX1.1: BOOL; // Move elevator's table up
-	ElevatorTableDown AT %QX1.2: BOOL; // Move elevator's table down
+	qElevatorConveyor AT %QX1.0: BOOL; // Elevator's conveyor on/off
+	qElevatorUp AT %QX1.1: BOOL; // Move elevator's table up
+	qElevatorDown AT %QX1.2: BOOL; // Move elevator's table down
 	
 	// Conveyor 2 outputs
-	Conveyor2 AT %QX2.0: BOOL; // Second conveyor on/off
-	PusherPush AT %QX2.1: BOOL; // Push with pusher
-	PusherRetract AT %QX2.2: BOOL; // Retract pusher
+	qConveyor2 AT %QX2.0: BOOL; // Second conveyor on/off
+	qPusherPush AT %QX2.1: BOOL; // Push with pusher
+	qPusherRetract AT %QX2.2: BOOL; // Retract pusher
 	
 	// Box outputs
-	BoxShaker AT %QX3.0: BOOL; // Shake the box
+	qBoxShaker AT %QX3.0: BOOL; // Shake the box
 END_VAR]]></Declaration>
     <Implementation>
       <NWL>
@@ -325,7 +330,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"ElevatorSensor"</v>
+                                <v n="Operand">"iElevatorSensor"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -574,7 +579,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"ElevatorTableIsLifted"</v>
+                                <v n="Operand">"iElevatorIsLifted"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -823,7 +828,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"Conveyor2Sensor"</v>
+                                <v n="Operand">"iConveyor2Sensor"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -1088,7 +1093,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"PusherRetracted"</v>
+                                <v n="Operand">"iPusherRetracted"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -1107,7 +1112,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"Conveyor2Sensor"</v>
+                                <v n="Operand">"iConveyor2Sensor"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -1356,7 +1361,7 @@ END_VAR]]></Declaration>
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"PusherPushed"</v>
+                                <v n="Operand">"iPusherPushed"</v>
                                 <v n="Type">"BOOL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -1713,7 +1718,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"Conveyor1"</v>
+                            <v n="Operand">"qConveyor1"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -1774,7 +1779,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"ElevatorConveyor"</v>
+                            <v n="Operand">"qElevatorConveyor"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -1943,7 +1948,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"ElevatorTableUp"</v>
+                            <v n="Operand">"qElevatorUp"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -2004,7 +2009,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"Conveyor2"</v>
+                            <v n="Operand">"qConveyor2"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -2135,7 +2140,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"PusherPush"</v>
+                            <v n="Operand">"qPusherPush"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -2196,7 +2201,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"ElevatorTableDown"</v>
+                            <v n="Operand">"qElevatorDown"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -2212,7 +2217,7 @@ END_VAR]]></Declaration>
                             <v n="Id">223L</v>
                           </o>
                           <o>
-                            <v n="Operand">"PusherRetract"</v>
+                            <v n="Operand">"qPusherRetract"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -2273,7 +2278,7 @@ END_VAR]]></Declaration>
                       <o n="OutputItems" t="OutputItemList">
                         <l2 n="OutputItems" cet="Operand">
                           <o>
-                            <v n="Operand">"BoxShaker"</v>
+                            <v n="Operand">"qBoxShaker"</v>
                             <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
