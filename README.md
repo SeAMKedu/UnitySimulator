@@ -13,3 +13,5 @@
 - Build2.7z contains the newest simulation that uses the variables according to the standard. Inputs were also added for the conveyors. Both TwinCAT projects were updated to match these.
 
 - LiftingPusherConveyor_PLC.vcmx contains the model used (Visual Components project file)
+
+- VM_TwinCAT_isolated_core.docx - Guide to setting isolated core in TwinCAT project (written in finnish)
